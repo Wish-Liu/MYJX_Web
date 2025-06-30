@@ -1,47 +1,28 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { Menu, Search, User, ShoppingBag } from '@element-plus/icons-vue'
+import './App.css'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+<el-container class="layout-container">
+  <el-header class="header">
+    <div class="header-content">
+      <div class="left-section">
+        <el-icon class="operation-icon"><Operation /></el-icon>
+        <el-text style="font-size: 20px; font-weight: bold;">菜单</el-text>
+      </div>
+      <div class="center-section">
+        <h1 class="logo">Surprise Art</h1>
+      </div>
+      <div class="right-section">
+        <el-icon><Search /></el-icon>
+        <el-icon><User /></el-icon>
+        <el-icon><ShoppingBag /></el-icon>
+      </div>
     </div>
-  </header>
+  </el-header>
+  <el-main class="main">
 
-  <main>
-    <TheWelcome />
-  </main>
+  </el-main>
+</el-container>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
