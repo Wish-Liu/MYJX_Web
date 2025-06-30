@@ -1,7 +1,7 @@
 .layout-container {
-  width: 100%;
-  height: 100%; 
-  background-color: #E5E5E5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 .header {
   padding: 10px 20px;
@@ -18,13 +18,13 @@
 .left-section {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
 }
-.operation-icon {
-  width: 32px;
-  height: 32px;
+.left-section .el-icon {
+  font-size: 20px;
   cursor: pointer;
 }
+
 .center-section {
   position: absolute;
   left: 50%;
@@ -59,3 +59,123 @@
     font-size: 18px;
   }
 }
+
+.main {
+  flex: 1;
+  padding: 0;
+}
+
+.footer {
+  background-color: #E5E5E5;
+  padding: 40px 0;
+  height: auto !important;
+}
+.footer-text-container {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer-text {
+  font-size: 50px;
+  font-family: 'Dancing Script', cursive;
+  font-style: italic;
+  color: #000;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.footer-section {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.footer-section:last-child {
+  margin-right: 0;
+}
+
+.footer-section h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.footer-section li:hover {
+  color: #333;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 40px auto 0;
+  padding: 20px;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.location {
+  display: flex;
+  gap: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.social-icons .el-icon {
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+}
+
+.social-icons .el-icon:hover {
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+  }
+  
+  .footer-section {
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .location {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
