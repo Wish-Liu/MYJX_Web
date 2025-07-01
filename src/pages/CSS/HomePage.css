@@ -59,6 +59,7 @@ html {
   position: relative;
 }
 
+
 .left-section {
   display: flex;
   align-items: center;
@@ -155,7 +156,8 @@ html {
   }
 
   .main-three {
-    height: auto;
+    /* height: auto; */
+    /*  */
     padding: 10px 0;
     overflow-x: auto;
     white-space: nowrap;
@@ -298,7 +300,7 @@ html {
   }
 
   .footer-section {
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     width: 100%;
   }
 
@@ -350,6 +352,7 @@ html {
 }
 
 .main-three {
+  height: 90px;
   min-height: 80px;
   width: 100%;
   margin: 0;

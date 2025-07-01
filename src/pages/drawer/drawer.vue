@@ -1,4 +1,8 @@
+<!-- Drawer.vue -->
 <script setup>
+import "../CSS/Drawer.css";
+import { ref, computed, watch } from "vue";
+
 const props = defineProps({
   drawer: {
     type: Boolean,
@@ -7,134 +11,155 @@ const props = defineProps({
 });
 const emit = defineEmits(["update:drawer"]);
 
-// 导入图片
-import plusIcon from "@/assets/images/+16X16.png";
-
+// 控制子抽屉显示与选中的一级菜单
+const subDrawerVisible = ref(false);
+const selectedMenuTitle = ref("");
+// 记录当前选中的二级菜单项
+const selectedSubItem = ref("");
+// 控制二级抽屉显示与选中的二级菜单
 const handleClose = () => {
   emit("update:drawer", false);
+  // 当主抽屉关闭时，同时关闭二级抽屉
+  subDrawerVisible.value = false;
+  //取消选中
+  selectedMenuTitle.value = "";
+  selectedSubItem.value = "";
 };
+// 打开二级抽屉
+const openSubDrawer = (title) => {
+  selectedMenuTitle.value = title;
+  subDrawerVisible.value = true;
+};
+// 关闭二级抽屉
+const handleSubDrawerClose = () => {
+  subDrawerVisible.value = false;
+};
+// 处理二级菜单项点击
+const handleSubItemClick = (item) => {
+  selectedSubItem.value = item;
+  // 这里可以添加实际业务逻辑，如跳转页面等
+  console.log("选择了:", selectedMenuTitle.value, "->", item);
+};
+
+// 模拟菜单数据
+const res = [
+  {
+    title: "高级珠宝",
+    subTitle: [],
+  },
+  {
+    title: "珠宝",
+    subTitle: ["项链", "戒指", "耳机", "手镯", "个性定制", "浏览全部"],
+  },
+  {
+    title: "穿搭",
+    subTitle: [],
+  },
+  {
+    title: "美妆",
+    subTitle: [],
+  },
+  {
+    title: "音响",
+    subTitle: [],
+  },
+  {
+    title: "礼品定制",
+    subTitle: [],
+  },
+];
+
+// 当前子菜单项内容
+const currentSubList = computed(() => {
+  return (
+    res.find((item) => item.title === selectedMenuTitle.value)?.subTitle || []
+  );
+});
+
+// 图标
+import plusIcon from "@/assets/images/+16X16.png";
+
+// 监听主抽屉关闭事件
+watch(
+  () => props.drawer,
+  (newVal) => {
+    if (!newVal) {
+      subDrawerVisible.value = false;
+    }
+  }
+);
 </script>
 
 <template>
-  <div>
-    <el-drawer
-      v-model="props.drawer"
-      direction="ltr"
-      size="300px"
-      @close="handleClose"
-    >
-      <template #header>
-        <div class="drawer-title-wrapper">
-          <h2 class="drawer-title">系列</h2>
-        </div>
-      </template>
-      <div class="drawer-content">
-        <div class="menu-sectionone">
-          <div class="menu-items">
-            <div>高级珠宝</div>
-            <div>珠宝</div>
-            <div>穿搭</div>
-            <div>美妆</div>
-            <div>音响</div>
-            <div>礼品定制</div>
-          </div>
-        </div>
-        <div class="menu-sectiontwo">
-          <el-row justify="space-between" align="middle" class="menu-row">
-            <div class="menu-title">走进Surprise Ant</div>
-            <el-image
-              :src="plusIcon"
-              fit="cover"
-              style="width: 16px; height: 16px"
-            />
-          </el-row>
-        </div>
-        <div class="menu-sectionthree">
-          <div class="menu-title">联系我们</div>
-          <div class="menu-items">
-            <div>客服</div>
-            <div>门店信息</div>
+  <!-- 主抽屉 -->
+  <el-drawer
+    v-model="props.drawer"
+    direction="ltr"
+    :size="subDrawerVisible ? '600px' : '300px'"
+    @close="handleClose"
+    class="main-drawer"
+  >
+    <template #header>
+      <div class="drawer-title-wrapper">
+        <h2 class="drawer-title">系列</h2>
+      </div>
+    </template>
+
+    <div class="drawer-content">
+      <!-- 一级菜单 -->
+      <div class="menu-sectionone">
+        <div class="menu-items">
+          <div
+            v-for="item in res"
+            :key="item.title"
+            @click="openSubDrawer(item.title)"
+            class="menu-item"
+            :class="{ active: selectedMenuTitle === item.title }"
+          >
+            {{ item.title }}
           </div>
         </div>
       </div>
-    </el-drawer>
-  </div>
+
+      <!-- 第二部分 -->
+      <div class="menu-sectiontwo">
+        <el-row class="menu-row">
+          <div class="menu-title">走进Surprise Ant</div>
+          <el-image
+            :src="plusIcon"
+            fit="cover"
+            style="width: 16px; height: 16px; margin-bottom: 10px"
+          />
+        </el-row>
+      </div>
+
+      <!-- 第三部分 -->
+      <div class="menu-sectionthree">
+        <div class="menu-title">联系我们</div>
+        <div class="menu-items">
+          <div>客服</div>
+          <div>门店信息</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 二级抽屉 -->
+    <div class="sub-drawer" :class="{ open: subDrawerVisible }">
+      <div class="sub-drawer-header">
+        <div @click="handleSubDrawerClose" class="back-button">← 返回</div>
+        <h3>{{ selectedMenuTitle }}</h3>
+      </div>
+      <div class="sub-drawer-content">
+        <div
+          v-for="(item, index) in currentSubList"
+          :key="index"
+          class="sub-menu-item"
+          :class="{ active: selectedSubItem === item }"
+          @click="handleSubItemClick(item)"
+        >
+          {{ item }}
+        </div>
+      </div>
+    </div>
+  </el-drawer>
 </template>
-<style scoped>
-.join-surprise {
-  text-align: center;
-  padding: 20px 0;
-}
-
-.join-surprise h2 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.dotted-line {
-  color: #666;
-  letter-spacing: 2px;
-}
-
-.drawer-content {
-  padding: 20px;
-}
-
-.menu-title {
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 0;
-  color: #333;
-}
-
-.menu-items {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.menu-items div {
-  color: #666;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.menu-items div:hover {
-  color: #333;
-}
-
-.drawer-title-wrapper {
-  display: inline-block;
-}
-
-.drawer-title {
-  padding-bottom: 10px;
-  border-bottom: 1px solid #000;
-  margin: 0;
-  display: inline-block;
-}
-
-:deep(.el-drawer__header) {
-  margin-bottom: 0;
-  padding: 15px;
-  border-bottom: none;
-}
-
-:deep(.el-drawer__body) {
-  padding: 0;
-}
-
-.menu-sectionone {
-  margin-bottom: 40px;
-}
-.menu-sectiontwo {
-  margin-bottom: 390px;
-}
-
-.menu-row {
-  display: flex;
-  align-items: center;
-  padding: 10px 0;
-}
-</style>

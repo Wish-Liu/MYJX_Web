@@ -1,0 +1,174 @@
+.join-surprise {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.join-surprise h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.dotted-line {
+  color: #666;
+  letter-spacing: 2px;
+}
+
+.drawer-content {
+  padding: 20px;
+}
+
+.menu-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 0;
+  color: #333;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-items div {
+  color: #666;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.menu-items div:hover {
+  color: #333;
+}
+
+.drawer-title-wrapper {
+  display: inline-block;
+}
+
+.drawer-title {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+  margin: 0;
+  display: inline-block;
+}
+
+:deep(.el-drawer__header) {
+  margin-bottom: 0;
+  padding: 15px;
+  border-bottom: none;
+}
+
+:deep(.el-drawer__body) {
+  padding: 0;
+}
+.menu-sectiontwo {
+  margin-bottom: 160px;
+}
+
+.menu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0;
+}
+/* 主抽屉样式 */
+.main-drawer {
+  position: relative;
+  overflow: visible;
+}
+
+.drawer-content {
+  padding: 20px;
+}
+
+.menu-item {
+  padding: 12px 0;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.menu-item:hover {
+  color: #000000;
+}
+
+.menu-item.active {
+  color: #000000;
+  font-weight: bold;
+}
+
+.menu-sectiontwo,
+.menu-sectionthree {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.menu-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* 二级抽屉样式 */
+.sub-drawer {
+  position: absolute;
+  top: 0;
+  right: -300px; /* 初始在屏幕外 */
+  width: 300px;
+  height: 100%;
+  background: white;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease;
+  z-index: 10;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.sub-drawer.open {
+  right: 0; /* 打开时显示 */
+}
+
+.sub-drawer-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.back-button {
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+
+.back-button:hover {
+  color: #e043b9;
+}
+
+.sub-drawer-header h3 {
+  font-size: 18px;
+  color: #000000;
+  margin: 0;
+}
+
+.sub-menu-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f5f5f5;
+  cursor: pointer;
+  transition: 0.2s;
+  color: #666; /* 默认灰色 */
+}
+
+.sub-menu-item:hover {
+  color: #000000;
+}
+.sub-menu-item.active {
+  color: #000; /* 选中黑色 */
+  font-weight: bold;
+}
