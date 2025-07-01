@@ -1,13 +1,5 @@
 <script setup>
-import {
-  Operation,
-  Search,
-  User,
-  ShoppingBag,
-  Message,
-  Apple,
-  CaretTop,
-} from "@element-plus/icons-vue";
+import { Message, Apple, CaretTop } from "@element-plus/icons-vue";
 import "./CSS/HomePage.css";
 import backgroundImage from "../assets/images/beij.png";
 import logo from "../assets/images/logo.png";
@@ -15,18 +7,8 @@ import google from "../assets/images/底部谷歌20X20.png";
 import facebook from "../assets/images/底部FB20X20.png";
 import line from "../assets/images/在线咨询130X32.png";
 import { ref, onMounted, onUnmounted } from "vue";
-import drawer from "./drawer/drawer.vue";
 
-const drawers = ref(false);
 const showBackTop = ref(false);
-
-const handleMenuClick = () => {
-  drawers.value = true;
-};
-
-const handleClose = (message) => {
-  drawers.value = message;
-};
 
 // 监听滚动
 const handleScroll = () => {
@@ -55,37 +37,6 @@ onUnmounted(() => {
 
 <template>
   <div style="height: 100%; width: 100%">
-    <drawer :drawer="drawers" @update:drawer="handleClose" />
-    <!-- 头部 -->
-    <el-header class="header">
-      <div class="header-content">
-        <div class="left-section" @click="handleMenuClick">
-          <el-icon>
-            <Operation />
-          </el-icon>
-          <el-text style="font-size: 18px">菜单</el-text>
-        </div>
-        <div class="center-section">
-          <el-image
-            :src="logo"
-            alt="Surprise Art"
-            style="width: 300px; height: 50px"
-          />
-        </div>
-        <div class="right-section">
-          <el-icon>
-            <Search />
-          </el-icon>
-          <el-icon>
-            <User />
-          </el-icon>
-          <el-icon>
-            <ShoppingBag />
-          </el-icon>
-        </div>
-      </div>
-    </el-header>
-
     <!-- 主内容区 -->
     <div class="content-wrapper">
       <!-- 头部大图 -->
@@ -199,6 +150,7 @@ onUnmounted(() => {
         </el-row>
       </div>
     </el-footer>
+
     <!-- 底部工具栏 -->
     <div class="bottom-tools">
       <el-row justify="space-between" align="middle">

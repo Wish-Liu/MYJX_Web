@@ -79,7 +79,6 @@
 .menu-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   width: 100%;
   padding: 10px 0;
 }
@@ -122,19 +121,21 @@
 .sub-drawer {
   position: absolute;
   top: 0;
-  right: -800px;
-  width: 800px;
+  left: 300px;
+  width: 700px;
   height: 100%;
   background: white;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-  transition: right 0.3s ease;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   z-index: 10;
   padding: 20px;
   overflow-y: auto;
+  border-left: 1px solid #eee;
 }
 
 .sub-drawer.open {
-  right: 0;
+  transform: translateX(0);
 }
 
 /* 二级抽屉头部 */
@@ -155,7 +156,7 @@
 }
 
 .back-button:hover {
-  color: #e043b9;
+  color: #000000;
 }
 
 .sub-drawer-header h3 {
@@ -183,7 +184,7 @@
 }
 
 .sub-two {
-  width: 400px;
+  width: 330px;
   height: auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
