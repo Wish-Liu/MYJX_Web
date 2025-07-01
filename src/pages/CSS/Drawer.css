@@ -122,8 +122,8 @@
 .sub-drawer {
   position: absolute;
   top: 0;
-  right: -300px;
-  width: 300px;
+  right: -800px;
+  width: 800px;
   height: 100%;
   background: white;
   box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
@@ -181,3 +181,21 @@
   color: #000;
   font-weight: bold;
 }
+
+.sub-two {
+  width: 400px;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* background-color: #ffffff; */
+  padding: 25px;
+  gap: 5px;
+}
+
+.sub-two-item {
+  width: 152px;
+  height: 110px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+

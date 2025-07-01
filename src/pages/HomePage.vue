@@ -182,12 +182,12 @@ onUnmounted(() => {
           <el-image
             :src="google"
             fit="cover"
-            style="width: 20px; height: 20px"
+            style="width: 20px; height: 20px; cursor: pointer"
           />
           <el-image
             :src="facebook"
             fit="cover"
-            style="width: 20px; height: 20px"
+            style="width: 20px; height: 20px; cursor: pointer"
           />
         </div>
       </div>

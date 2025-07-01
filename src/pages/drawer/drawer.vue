@@ -2,7 +2,11 @@
 <script setup>
 import "../CSS/Drawer.css";
 import { ref, computed, watch } from "vue";
-
+// 图标
+import plusIcon from "@/assets/images/+16X16.png";
+import antImage from "@/assets/蚂蚁系列/耳机/蚂蚁系列框148X110.png";
+import SuspendedSilo from "@/assets/吊筒仓系列/吊桶系列.png";
+import earphoneCase from "@/assets/耳机盒系列/耳机仓系列框143X110.png";
 const props = defineProps({
   drawer: {
     type: Boolean,
@@ -40,34 +44,67 @@ const handleSubItemClick = (item) => {
   // 这里可以添加实际业务逻辑，如跳转页面等
   console.log("选择了:", selectedMenuTitle.value, "->", item);
 };
-
 // 模拟菜单数据
+
 const res = [
   {
     title: "高级珠宝",
     subTitle: [],
+    series: [],
   },
   {
     title: "珠宝",
     subTitle: ["项链", "戒指", "耳机", "手镯", "个性定制", "浏览全部"],
+    series: [
+      {
+        title: "蚂蚁系列",
+        subTitle: {
+          title: "蚂蚁系列",
+          img: antImage,
+        },
+      },
+      {
+        title: "吊桶仓系列",
+        subTitle: {
+          title: "吊桶仓系列",
+          img: SuspendedSilo,
+        },
+      },
+      {
+        title: "耳机盒系列",
+        subTitle: {
+          title: "耳机盒系列",
+          img: earphoneCase,
+        },
+      },
+    ],
   },
   {
     title: "穿搭",
     subTitle: [],
+    series: [],
   },
   {
     title: "美妆",
     subTitle: [],
+    series: [],
   },
   {
     title: "音响",
     subTitle: [],
+    series: [],
   },
   {
     title: "礼品定制",
     subTitle: [],
+    series: [],
   },
 ];
+
+// 当前选中菜单的数据
+const currentMenuData = computed(() => {
+  return res.find((item) => item.title === selectedMenuTitle.value) || {};
+});
 
 // 当前子菜单项内容
 const currentSubList = computed(() => {
@@ -75,9 +112,6 @@ const currentSubList = computed(() => {
     res.find((item) => item.title === selectedMenuTitle.value)?.subTitle || []
   );
 });
-
-// 图标
-import plusIcon from "@/assets/images/+16X16.png";
 
 // 监听主抽屉关闭事件
 watch(
@@ -95,7 +129,7 @@ watch(
   <el-drawer
     v-model="props.drawer"
     direction="ltr"
-    :size="subDrawerVisible ? '600px' : '300px'"
+    :size="subDrawerVisible ? '1100px' : '300px'"
     @close="handleClose"
     class="main-drawer"
   >
@@ -128,7 +162,7 @@ watch(
           <el-image
             :src="plusIcon"
             fit="cover"
-            style="width: 16px; height: 16px; margin-bottom: 10px"
+            style="width: 16px; height: 16px"
           />
         </el-row>
       </div>
@@ -145,23 +179,31 @@ watch(
 
     <!-- 二级抽屉 -->
     <div class="sub-drawer" :class="{ open: subDrawerVisible }">
-      <div class="sub-drawer-header">
-        <div @click="handleSubDrawerClose" class="back-button">← 返回</div>
-        <h3>{{ selectedMenuTitle }}</h3>
-      </div>
-      <div class="sub-drawer-content">
-        <div
-          v-for="(item, index) in currentSubList"
-          :key="index"
-          class="sub-menu-item"
-          :class="{ active: selectedSubItem === item }"
-          @click="handleSubItemClick(item)"
-        >
-          {{ item }}
+      <el-row style="display: flex; justify-content: space-between">
+        <div class="sub-one">
+          <div class="sub-drawer-header">
+            <div @click="handleSubDrawerClose" class="back-button">← 返回</div>
+            <h3>{{ selectedMenuTitle }}</h3>
+          </div>
+          <div class="sub-drawer-content">
+            <div
+              v-for="(item, index) in currentSubList"
+              :key="index"
+              class="sub-menu-item"
+              :class="{ active: selectedSubItem === item }"
+              @click="handleSubItemClick(item)"
+            >
+              {{ item }}
+            </div>
+          </div>
         </div>
-      </div>
+        <div class="sub-two">
+          <div class="sub-two-item" v-for="item in res[1].series" :key="item">
+            <img :src="item.subTitle.img" alt="" class="sub-two-item" />
+            <span>{{ item.title }}</span>
+          </div>
+        </div>
+      </el-row>
     </div>
-    <!-- 三级抽屉 -->
-    <div></div>
   </el-drawer>
 </template>
