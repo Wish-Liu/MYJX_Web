@@ -121,7 +121,7 @@ const handleClose = (message) => {
         </div>
 
         <div class="footer-section">
-          <h3>关于Surprise AIT</h3>
+          <h3>关于Surprise AnT</h3>
           <ul>
             <li>道德与合格</li>
             <li>招贤纳士</li>
