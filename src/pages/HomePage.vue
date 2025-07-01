@@ -6,6 +6,7 @@ import {
   ShoppingBag,
   Message,
   Apple,
+  CaretTop,
 } from "@element-plus/icons-vue";
 import "./CSS/HomePage.css";
 import backgroundImage from "../assets/images/beij.png";
@@ -13,87 +14,114 @@ import logo from "../assets/images/logo.png";
 import google from "../assets/images/底部谷歌20X20.png";
 import facebook from "../assets/images/底部FB20X20.png";
 import line from "../assets/images/在线咨询130X32.png";
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import drawer from "./drawer/drawer.vue";
+
 const drawers = ref(false);
+const showBackTop = ref(false);
+
 const handleMenuClick = () => {
   drawers.value = true;
 };
+
 const handleClose = (message) => {
   drawers.value = message;
 };
+
+// 监听滚动
+const handleScroll = () => {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const viewportHeight = window.innerHeight;
+  showBackTop.value = scrollTop > viewportHeight * 0.7;
+};
+
+// 回到顶部
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
+// 生命周期钩子
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
-  <el-container class="layout-container">
+  <div style="height: 100%; width: 100%">
     <drawer :drawer="drawers" @update:drawer="handleClose" />
-    <!-- 导航栏 -->
-    <div style="height: 100vh; width: 100%">
-      <el-header class="header">
-        <div class="header-content">
-          <div class="left-section" @click="handleMenuClick">
-            <el-icon>
-              <Operation />
-            </el-icon>
-            <el-text style="font-size: 18px">菜单</el-text>
-          </div>
-          <div class="center-section">
-            <el-image
-              :src="logo"
-              alt="Surprise Art"
-              style="width: 300px; height: 50px"
-            />
-          </div>
-          <div class="right-section">
-            <el-icon>
-              <Search />
-            </el-icon>
-            <el-icon>
-              <User />
-            </el-icon>
-            <el-icon>
-              <ShoppingBag />
-            </el-icon>
-          </div>
+    <!-- 头部 -->
+    <el-header class="header">
+      <div class="header-content">
+        <div class="left-section" @click="handleMenuClick">
+          <el-icon>
+            <Operation />
+          </el-icon>
+          <el-text style="font-size: 18px">菜单</el-text>
         </div>
-      </el-header>
+        <div class="center-section">
+          <el-image
+            :src="logo"
+            alt="Surprise Art"
+            style="width: 300px; height: 50px"
+          />
+        </div>
+        <div class="right-section">
+          <el-icon>
+            <Search />
+          </el-icon>
+          <el-icon>
+            <User />
+          </el-icon>
+          <el-icon>
+            <ShoppingBag />
+          </el-icon>
+        </div>
+      </div>
+    </el-header>
+
+    <!-- 主内容区 -->
+    <div class="content-wrapper">
+      <!-- 头部大图 -->
       <div class="header-img">
         <el-image :src="backgroundImage" fit="cover" />
       </div>
+      <!-- 轮播图 -->
+      <div class="main-one">
+        <div class="main-one-content">
+          <el-image :src="backgroundImage" fit="cover" />
+        </div>
+      </div>
+      <!-- 商品展示 -->
+      <div class="main-two">
+        <div class="main-two-content">
+          <el-image :src="backgroundImage" fit="cover" />
+        </div>
+      </div>
+      <!-- 加入Surprise Ant的智能世界 -->
+      <div class="main-three">
+        <div class="join-surprise">
+          <div class="title-wrapper">
+            <el-row justify="center" align="middle">
+              <h2 class="join-surprise-title">点击加入</h2>
+              <h2>Surprise Ant的智能世界</h2>
+            </el-row>
+          </div>
+          <div class="dotted-line">********************************</div>
+        </div>
+      </div>
     </div>
-    <!-- 主内容区 -->
-    <el-main class="main">
-      <el-scrollbar>
-        <!-- 轮播图 -->
-        <div class="main-one">
-          <div class="main-one-content">
-            <el-image :src="backgroundImage" fit="cover" />
-          </div>
-        </div>
-        <!-- 商品展示 -->
-        <div class="main-two">
-          <div class="main-two-content">
-            <el-image :src="backgroundImage" fit="cover" />
-          </div>
-        </div>
-        <!-- 加入Surprise Ant的智能世界 -->
-        <div class="main-three">
-          <div class="join-surprise">
-            <div class="title-wrapper">
-              <el-row justify="center" align="middle">
-                <h2 class="join-surprise-title">点击加入</h2>
-                <h2>Surprise Ant的智能世界</h2>
-              </el-row>
-            </div>
-            <div class="dotted-line">********************************</div>
-          </div>
-        </div>
-      </el-scrollbar>
-    </el-main>
+
     <!-- 底部 -->
     <el-footer class="footer">
       <div class="footer-text-container">
-        <el-text class="footer-text">
+        <el-text>
           <el-image
             :src="logo"
             alt="Surprise Art"
@@ -170,7 +198,22 @@ const handleClose = (message) => {
           >
         </el-row>
       </div>
-      <el-image :src="line" fit="cover" class="line-image" />
     </el-footer>
-  </el-container>
+    <!-- 底部工具栏 -->
+    <div class="bottom-tools">
+      <el-row justify="space-between" align="middle">
+        <!-- 在线咨询 -->
+        <el-image :src="line" fit="cover" class="line-image" />
+
+        <!-- 回到顶部 -->
+        <div
+          class="back-to-top"
+          :class="{ show: showBackTop }"
+          @click="scrollToTop"
+        >
+          <el-icon><CaretTop /></el-icon>
+        </div>
+      </el-row>
+    </div>
+  </div>
 </template>
