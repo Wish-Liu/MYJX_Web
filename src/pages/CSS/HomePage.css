@@ -34,13 +34,23 @@ body {
 /* ===================================
    3. 主要内容区域样式
 =================================== */
-.main-one-content,
-.main-two-content {
+
+/* 商品展示 */
+.main-two {
+  background-image: 
+  url("@/assets/首页/模特.png");
+background-size: cover;
+background-position: center;
   width: 100%;
   height: 100vh;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
+
+
 
 .main-one-content img,
 .main-two-content img {

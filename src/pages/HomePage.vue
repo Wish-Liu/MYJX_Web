@@ -7,9 +7,25 @@ import google from "../assets/images/底部谷歌20X20.png";
 import facebook from "../assets/images/底部FB20X20.png";
 import line from "../assets/images/在线咨询130X32.png";
 import { ref, onMounted, onUnmounted } from "vue";
-
+import router from "@/utils/router";
+import antSeries1 from "@/assets/首页/轮播.png";
+import antSeries2 from "@/assets/首页/轮播2.png";
+import antSeries3 from "@/assets/首页/轮播3.png";
 const showBackTop = ref(false);
-
+const result = [
+  {
+    id: 1,
+    image: antSeries1,
+  },
+  {
+    id: 2,
+    image: antSeries2,
+  },
+  {
+    id: 3,
+    image: antSeries3,
+  },
+];
 // 监听滚动
 const handleScroll = () => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -46,15 +62,24 @@ onUnmounted(() => {
       <!-- 轮播图 -->
       <div class="main-one">
         <div class="main-one-content">
-          <el-image :src="backgroundImage" fit="cover" />
+          <el-carousel
+            height="100vh"
+            :interval="3000"
+            arrow="hover"
+            indicator-position="onne"
+          >
+            <el-carousel-item v-for="item in result" :key="item.id">
+              <el-image
+                :src="item.image"
+                fit="cover"
+                style="width: 100%; height: 100%; object-fit: cover"
+              />
+            </el-carousel-item>
+          </el-carousel>
         </div>
       </div>
       <!-- 商品展示 -->
-      <div class="main-two">
-        <div class="main-two-content">
-          <el-image :src="backgroundImage" fit="cover" />
-        </div>
-      </div>
+      <div class="main-two"></div>
       <!-- 加入Surprise Ant的智能世界 -->
       <div class="main-three">
         <div class="join-surprise">

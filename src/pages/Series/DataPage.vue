@@ -70,6 +70,16 @@ watch(
 onMounted(() => {
   loadSeriesData();
 });
+
+// 打开产品详情
+const openProductDetail = (item) => {
+  router.push({
+    path: "/commodity",
+    query: {
+      title: item.name,
+    },
+  });
+};
 </script>
 
 <template>
@@ -77,7 +87,12 @@ onMounted(() => {
     <div class="product-grid">
       <!-- 产品列表 -->
       <div class="product-item">
-        <div class="product-item-div" v-for="item in Series" :key="item.id">
+        <div
+          class="product-item-div"
+          v-for="item in Series"
+          :key="item.id"
+          @click="openProductDetail(item)"
+        >
           <img
             :src="item.image"
             alt="产品图片"
@@ -157,6 +172,7 @@ onMounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 .product-item-div-text {
   width: 100%;
