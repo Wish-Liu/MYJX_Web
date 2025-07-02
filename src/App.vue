@@ -139,8 +139,6 @@ const handleLogoClick = () => {
 /* 为路由内容添加顶部边距，避免被固定导航栏遮挡 */
 .app-content {
   margin-top: 80px;
-  min-height: calc(100vh - 80px);
-  height: calc(100vh - 80px);
 }
 
 /* 响应式设计 */
