@@ -1,7 +1,8 @@
 // router/index.js
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/pages/HomePage.vue'
-import AntSeries from '@/pages/AntSeries/AntSeries.vue'
+import Series from '@/pages/Series/Series.vue'
+import DataPage from '@/pages/Series/DataPage.vue'
 
 const routes = [
   {
@@ -10,9 +11,16 @@ const routes = [
     component: HomePage
   },
   {
-    path: "/AntSeries",
-    name: "AntSeries",
-    component: AntSeries,
+    path: "/Series",
+    name: "Series",
+    component: Series,
+    children: [
+      {
+        path: "",
+        name: "DataPage",
+        component: DataPage
+      },
+    ]
   },
 ];
 

@@ -3,6 +3,7 @@ import { Operation, Search, User, ShoppingBag } from "@element-plus/icons-vue";
 import logo from "./assets/images/logo.png";
 import { ref } from "vue";
 import drawer from "./pages/drawer/drawer.vue";
+import router from "./utils/router";
 
 // 抽屉控制
 const drawers = ref(false);
@@ -15,6 +16,12 @@ const handleMenuClick = () => {
 // 抽屉关闭处理
 const handleClose = (message) => {
   drawers.value = message;
+};
+
+// 点击logo处理
+const handleLogoClick = () => {
+  //清空路由栈
+  router.replace("/");
 };
 </script>
 
@@ -36,7 +43,8 @@ const handleClose = (message) => {
           <el-image
             :src="logo"
             alt="Surprise Art"
-            style="width: 300px; height: 50px"
+            style="width: 300px; height: 50px; cursor: pointer"
+            @click="handleLogoClick"
           />
         </div>
         <div class="right-section">
@@ -63,7 +71,7 @@ const handleClose = (message) => {
 <style scoped>
 /* 全局导航栏样式 */
 .header {
-  padding: 10px 10px;
+  padding: 0px 20px;
   background-color: #ffffff;
   border-bottom: 1px solid #eee;
   width: 100%;
@@ -132,6 +140,7 @@ const handleClose = (message) => {
 .app-content {
   margin-top: 80px;
   min-height: calc(100vh - 80px);
+  height: calc(100vh - 80px);
 }
 
 /* 响应式设计 */

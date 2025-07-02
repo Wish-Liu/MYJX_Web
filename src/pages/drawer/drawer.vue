@@ -7,7 +7,7 @@ import router from "@/utils/router";
 import plusIcon from "@/assets/images/+16X16.png";
 import antImage from "@/assets/蚂蚁系列/耳机/蚂蚁系列框148X110.png";
 import SuspendedSilo from "@/assets/吊筒仓系列/吊桶系列.png";
-import earphoneCase from "@/assets/耳机盒系列/耳机仓系列框143X110.png";
+import earphoneCase from "@/assets/耳机盒系列/耳机仓系列框142X92.png";
 const props = defineProps({
   drawer: {
     type: Boolean,
@@ -120,12 +120,14 @@ const currentSubList = computed(() => {
 // 处理系列点击
 const open = (title) => {
   try {
-    const series = res[1].series.find((item) => item.title === title);
-    if (series) {
-      console.log(`准备跳转到${title}页面`);
-      router.push(series.subTitle.path);
-      handleClose();
-    }
+    console.log(`跳转系列${title}`);
+    router.push({
+      path: "/Series",
+      query: {
+        title: title,
+      },
+    });
+    handleClose();
   } catch (error) {
     console.error("路由跳转错误:", error);
   }

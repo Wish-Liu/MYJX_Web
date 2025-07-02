@@ -1,0 +1,35 @@
+.ant-series {
+  width: 100%;
+  height: 100%;
+  background-color: #e6e5e5;
+  display: flex;
+  flex-direction: column;
+}
+/* 导航栏 */
+.ant-series-nav {
+  background-color: #ffffff;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.ant-series-nav-title {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.ant-series-nav-title span:first-child {
+  font-size: 22px;
+  color: #000;
+}
+.ant-series-nav-filter {
+  font-size: 22px;
+  color: #000;
+  cursor: pointer;
+  border-bottom: 1px solid #000;
+}
+
