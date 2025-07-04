@@ -14,13 +14,21 @@ import antSeries19 from "@/assets/蚂蚁系列/项链/1项链详情图500X500.pn
 import antSeries20 from "@/assets/蚂蚁系列/戒指/2金戒指详情图600X600.png";
 import antSeries28 from "@/assets/蚂蚁系列/戒指/1金戒指详情图600X600.png";
 import antSeries29 from "@/assets/蚂蚁系列/戒指/3金戒指详情图600X600.png";
+import antSeries35 from "@/assets/蚂蚁系列/戒指/4金戒指详情图600X600.png";
+import antSeries36 from "@/assets/蚂蚁系列/戒指/5金戒指详情图600X600.png";
+import antSeries37 from "@/assets/蚂蚁系列/戒指/6金戒指详情图600X600.png";
 import antSeries26 from "@/assets/蚂蚁系列/戒指/2银戒指详情图600X600.png";
 import antSeries30 from "@/assets/蚂蚁系列/戒指/1银戒指详情图600X600.png";
 import antSeries31 from "@/assets/蚂蚁系列/戒指/3银戒指详情图600X600.png";
+import antSeries38 from "@/assets/蚂蚁系列/戒指/4银戒指详情图600X600.png";
+import antSeries39 from "@/assets/蚂蚁系列/戒指/5银戒指详情图600X600.png";
+import antSeries40 from "@/assets/蚂蚁系列/戒指/6银戒指详情图600X600.png";
 import antSeries27 from "@/assets/蚂蚁系列/戒指/2粉戒指详情图600X600.png";
 import antSeries32 from "@/assets/蚂蚁系列/戒指/1粉戒指详情图600X600.png";
 import antSeries33 from "@/assets/蚂蚁系列/戒指/3粉戒指详情图600X600.png";
-import antSeries21 from "@/assets/最近浏览/粉饼盒297X222.png";
+import antSeries41 from "@/assets/蚂蚁系列/戒指/4粉戒指详情图600X600.png";
+import antSeries42 from "@/assets/蚂蚁系列/戒指/5粉戒指详情图600X600.png";
+import antSeries43 from "@/assets/蚂蚁系列/戒指/6粉戒指详情图600X600.png";
 import antSeries10 from "@/assets/图标/服务大使22X22.png";
 import antSeries11 from "@/assets/图标/致电20X20.png";
 import antSeries12 from "@/assets/图标/礼物20X20.png";
@@ -34,7 +42,7 @@ import antSeries23 from "@/assets/蚂蚁系列/项链/2项链详情图600X600.pn
 import antSeries24 from "@/assets/蚂蚁系列/项链/3项链详情图500X500.png";
 import antSeries25 from "@/assets/蚂蚁系列/项链/4项链详情图600X600.png";
 import antSeries34 from "@/assets/蚂蚁系列/项链/小框项链70X70.png";
-import antSeries35 from "@/assets/吊筒仓系列/吊桶耳机360X334.png";
+
 // 导入Swiper相关组件
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -246,6 +254,18 @@ const result = [
         id: 3,
         image: antSeries26,
       },
+      {
+        id: 4,
+        image: antSeries38,
+      },
+      {
+        id: 5,
+        image: antSeries39,
+      },
+      {
+        id: 6,
+        image: antSeries40,
+      },
     ],
     golden: [
       {
@@ -260,6 +280,18 @@ const result = [
         id: 3,
         image: antSeries29,
       },
+      {
+        id: 4,
+        image: antSeries36,
+      },
+      {
+        id: 5,
+        image: antSeries37,
+      },
+      {
+        id: 6,
+        image: antSeries35,
+      },
     ],
     pink: [
       {
@@ -273,6 +305,18 @@ const result = [
       {
         id: 3,
         image: antSeries27,
+      },
+      {
+        id: 4,
+        image: antSeries41,
+      },
+      {
+        id: 5,
+        image: antSeries42,
+      },
+      {
+        id: 6,
+        image: antSeries43,
       },
     ],
     model: [
@@ -367,6 +411,8 @@ const handleImageClick = (index) => {
 const swiperOptions = {
   modules: [Autoplay, Pagination, Navigation],
   direction: "vertical",
+  grabCursor: true,
+  simulateTouch: true,
   loop: true,
   autoplay: {
     delay: 3000,
@@ -576,7 +622,7 @@ const handleRecentClick = (item) => {
               <img :src="item.image" :alt="item.name" class="recent-image" />
               <div class="recent-info">
                 <div class="recent-name">{{ item.name }}</div>
-                <div class="recent-price">{{ item.price }}</div>
+                <div class="recent-price">￥{{ item.price }}</div>
               </div>
             </div>
           </swiper-slide>
@@ -741,8 +787,11 @@ const handleRecentClick = (item) => {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
   transition: all 0.3s ease;
+  background: url("@/assets/最近浏览/最近浏览渐变.png") no-repeat center center;
+  background-size: cover;
 }
 
 .recent-item:hover {
@@ -754,7 +803,6 @@ const handleRecentClick = (item) => {
   width: 100%;
   height: 280px;
   object-fit: contain;
-  background: #f8f8f8;
   padding: 20px;
 }
 
@@ -861,5 +909,8 @@ const handleRecentClick = (item) => {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.recent-slide {
+  cursor: pointer;
 }
 </style>

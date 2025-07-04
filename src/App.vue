@@ -43,7 +43,7 @@ const handleLogoClick = () => {
           <el-image
             :src="logo"
             alt="Surprise Art"
-            style="width: 300px; height: 50px; cursor: pointer"
+            class="SurpriseArt"
             @click="handleLogoClick"
           />
         </div>
@@ -69,6 +69,10 @@ const handleLogoClick = () => {
 </template>
 
 <style scoped>
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
 /* 全局导航栏样式 */
 .header {
   padding: 0px 20px;
@@ -82,6 +86,11 @@ const handleLogoClick = () => {
   right: 0;
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.SurpriseArt {
+  width: 300px;
+  height: 50px;
+  cursor: pointer;
 }
 
 .header-content {
@@ -140,6 +149,12 @@ const handleLogoClick = () => {
 .app-content {
   margin-top: 80px;
 }
+@media screen and (max-width: 1440px) {
+  .SurpriseArt {
+    width: 200px;
+    height: 30px;
+  }
+}
 
 /* 响应式设计 */
 @media screen and (max-width: 768px) {
@@ -166,6 +181,10 @@ const handleLogoClick = () => {
   .right-section .el-icon {
     font-size: 18px;
   }
+  .SurpriseArt {
+    width: 150px;
+    height: 20px;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -179,6 +198,10 @@ const handleLogoClick = () => {
 
   .right-section {
     gap: 15px;
+  }
+  .SurpriseArt {
+    width: 100px;
+    height: 15px;
   }
 }
 </style>

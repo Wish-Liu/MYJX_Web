@@ -3,77 +3,92 @@
 =================================== */
 .join-surprise {
   text-align: center;
-  padding: 20px 0;
+  padding: clamp(15px, 3vw, 20px) 0;
 }
 
 .join-surprise h2 {
-  font-size: 24px;
+  font-size: clamp(18px, 4vw, 24px);
   color: #333;
-  margin-bottom: 10px;
+  margin-bottom: clamp(8px, 2vw, 10px);
+  line-height: 1.4;
 }
 
 .dotted-line {
   color: #666;
   letter-spacing: 2px;
+  font-size: clamp(12px, 2vw, 14px);
 }
 
 /* ===================================
    2. 主抽屉基础样式
 =================================== */
 .drawer-content {
-  padding: 20px;
+  padding: clamp(10px, 3vw, 20px);
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .drawer-title-wrapper {
   display: inline-block;
+  margin-bottom: clamp(10px, 2vw, 20px);
 }
 
 .drawer-title {
-  padding-bottom: 10px;
+  padding-bottom: clamp(5px, 1.5vw, 10px);
   border-bottom: 1px solid #000;
   margin: 0;
   display: inline-block;
+  font-size: clamp(16px, 3vw, 20px);
+  font-weight: 500;
 }
 
 /* Element Plus Drawer 样式覆盖 */
 :deep(.el-drawer__header) {
   margin-bottom: 0;
-  padding: 15px;
+  padding: clamp(10px, 2vw, 15px);
   border-bottom: none;
 }
 
 :deep(.el-drawer__body) {
   padding: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ===================================
    3. 主菜单样式
 =================================== */
 .menu-title {
-  font-weight: bold;
-  font-size: 18px;
-  margin-bottom: 0;
+  font-weight: 500;
+  font-size: clamp(16px, 3vw, 18px);
+  margin-bottom: clamp(10px, 2vw, 15px);
   color: #333;
 }
 
 .menu-items {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: clamp(8px, 2vw, 10px);
 }
 
 .menu-items div {
   color: #666;
   cursor: pointer;
-  font-size: 16px;
+  font-size: clamp(14px, 2.5vw, 16px);
+  padding: clamp(8px, 1.5vw, 12px) 0;
+  transition: all 0.3s ease;
 }
 
 .menu-items div:hover {
-  color: #333;
+  color: #000;
+  padding-left: 5px;
 }
 
 .menu-sectiontwo {
-  margin-bottom: 160px;
+  margin: clamp(40px, 8vh, 160px) 0;
+  padding-top: clamp(15px, 3vw, 20px);
+  border-top: 1px solid #eee;
 }
 
 .menu-row {
@@ -188,7 +203,6 @@
   height: auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* background-color: #ffffff; */
   padding: 15px;
   gap: 5px;
 }
@@ -199,4 +213,66 @@
   background-color: #f2f2f2;
   cursor: pointer;
 }
+
+/* 响应式设计 */
+@media screen and (max-width: 1024px) {
+  .sub-drawer {
+    width: 100%;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .menu-sectiontwo {
+    margin-bottom: 80px;
+  }
+
+  .sub-two-item {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1.38;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .drawer-content {
+    padding: 10px;
+  }
+
+  .menu-items div {
+    padding: 8px 0;
+  }
+
+  .sub-drawer {
+    padding: 10px;
+  }
+}
+
+/* 处理横屏模式 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .menu-sectiontwo {
+    margin-bottom: 40px;
+  }
+
+  .menu-items div {
+    padding: 5px 0;
+  }
+}
+
+/* 优化触摸交互 */
+@media (hover: none) {
+  .menu-items div,
+  .sub-two-item {
+    transition: none;
+  }
+
+  .menu-items div:active {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .sub-two-item:active {
+    transform: scale(0.98);
+  }
+}
+
 

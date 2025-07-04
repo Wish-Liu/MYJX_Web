@@ -1,6 +1,6 @@
 .ant-series {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   background-color: #e6e5e5;
   display: flex;
   flex-direction: column;
@@ -9,27 +9,81 @@
 .ant-series-nav {
   background-color: #ffffff;
   width: 100%;
-  height: 80px;
+  height: clamp(50px, 8vh, 80px);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 clamp(10px, 3vw, 20px);
   box-sizing: border-box;
+  position: fixed;
+  top: clamp(50px, 8vh, 80px);
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 .ant-series-nav-title {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  gap: clamp(8px, 2vw, 15px);
 }
 
 .ant-series-nav-title span:first-child {
-  font-size: 22px;
+  font-size: clamp(16px, 2.5vw, 22px);
   color: #000;
+  font-weight: 500;
 }
 .ant-series-nav-filter {
-  font-size: 22px;
+  font-size: clamp(14px, 2vw, 22px);
   color: #000;
   cursor: pointer;
   border-bottom: 1px solid #000;
+  padding-bottom: 2px;
+  transition: all 0.3s ease;
+}
+
+.ant-series-nav-filter:hover {
+  opacity: 0.8;
+  border-bottom-color: transparent;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+  .ant-series-nav {
+    padding: 0 10px;
+  }
+
+  .ant-series-nav-title {
+    gap: 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .ant-series-nav {
+    height: 50px;
+    top: 50px;
+  }
+
+  .ant-series-nav-title,
+  .ant-series-nav-filter {
+    font-size: clamp(14px, 4vw, 16px);
+  }
+}
+
+/* 处理横屏模式 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .ant-series-nav {
+    height: 40px;
+    top: 40px;
+  }
+}
+
+/* 优化触摸交互 */
+@media (hover: none) {
+  .ant-series-nav-filter {
+    transition: none;
+  }
+
+  .ant-series-nav-filter:active {
+    opacity: 0.7;
+  }
 }
 

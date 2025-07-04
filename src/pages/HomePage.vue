@@ -59,6 +59,8 @@ onUnmounted(() => {
 const swiperOptions = {
   modules: [Autoplay, Pagination, Navigation],
   loop: true,
+  grabCursor: true,
+  simulateTouch: true,
   autoplay: {
     delay: 3000,
     disableOnInteraction: false,
@@ -233,6 +235,7 @@ const swiperOptions = {
   width: 100%;
   height: 100vh;
   position: relative;
+  overflow: hidden;
 }
 
 .main-one-content {
@@ -247,8 +250,9 @@ const swiperOptions = {
 
 .slide-image {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 /* 分页器样式 */
@@ -279,8 +283,8 @@ const swiperOptions = {
   height: 40px !important;
   background-color: rgba(189, 184, 184, 0.9) !important;
   border-radius: 50%;
-  opacity: 0; /* 默认隐藏 */
-  transition: opacity 0.3s ease; /* 添加过渡效果 */
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 /* 鼠标悬停时显示导航按钮 */
@@ -304,7 +308,7 @@ const swiperOptions = {
 
 /* 导航按钮悬停效果 */
 .custom-nav-btn:hover {
-  background-color: rgba(82, 79, 79, 1) !important; /* 悬停时加深背景色 */
+  background-color: rgba(82, 79, 79, 1) !important;
 }
 
 /* 悬停效果 */
@@ -315,5 +319,160 @@ const swiperOptions = {
 :deep(.custom-bullet-active:hover) {
   background: url("@/assets/图标/蚂蚁按钮16X15.png") no-repeat center center;
   background-size: contain;
+}
+
+/* 响应式设计 - 大屏幕 */
+@media screen and (min-width: 1440px) {
+  .main-one {
+    height: 100vh;
+  }
+
+  .slide-image {
+    height: 100%;
+    max-height: 100vh;
+  }
+
+  .custom-nav-btn {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  :deep(.swiper-button-prev::after),
+  :deep(.swiper-button-next::after) {
+    font-size: 22px !important;
+  }
+}
+
+/* 响应式设计 - 平板设备 */
+@media screen and (max-width: 1024px) {
+  .main-one {
+    height: 80vh;
+    min-height: 500px; /* 设置最小高度 */
+  }
+
+  .slide-image {
+    height: 100%;
+    min-height: 500px;
+  }
+
+  .custom-nav-btn {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  :deep(.custom-bullet) {
+    width: 14px;
+    height: 14px;
+  }
+
+  :deep(.swiper-button-prev::after),
+  :deep(.swiper-button-next::after) {
+    font-size: 16px !important;
+  }
+}
+
+/* 响应式设计 - 手机设备 */
+@media screen and (max-width: 768px) {
+  .main-one {
+    height: 100vw; /* 改用vw单位 */
+  }
+
+  .slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 改用contain确保图片完整显示 */
+  }
+
+  .custom-nav-btn {
+    width: 30px !important;
+    height: 30px !important;
+    opacity: 0.8;
+  }
+
+  :deep(.custom-bullet) {
+    width: 12px;
+    height: 12px;
+    margin: 0 3px;
+  }
+
+  :deep(.swiper-button-prev),
+  :deep(.swiper-button-next) {
+    top: 50% !important;
+  }
+
+  :deep(.swiper-button-prev) {
+    left: 10px !important;
+  }
+
+  :deep(.swiper-button-next) {
+    right: 10px !important;
+  }
+
+  :deep(.swiper-button-prev::after),
+  :deep(.swiper-button-next::after) {
+    font-size: 14px !important;
+  }
+}
+
+/* 响应式设计 - 小屏手机 */
+@media screen and (max-width: 480px) {
+  .main-one {
+    height: 100vw;
+  }
+
+  .slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .custom-nav-btn {
+    width: 25px !important;
+    height: 25px !important;
+  }
+
+  :deep(.custom-bullet) {
+    width: 10px;
+    height: 10px;
+    margin: 0 2px;
+  }
+
+  :deep(.swiper-button-prev::after),
+  :deep(.swiper-button-next::after) {
+    font-size: 12px !important;
+  }
+}
+
+/* 处理横屏模式 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .main-one {
+    height: 100vh;
+    min-height: auto; /* 移除最小高度限制 */
+  }
+
+  .slide-image {
+    height: 100%;
+    width: 100%;
+    object-fit: contain; /* 横屏模式使用contain确保图片完整显示 */
+  }
+
+  :deep(.swiper-pagination) {
+    bottom: 15px !important;
+  }
+}
+
+/* 优化触摸交互 */
+@media (hover: none) {
+  .custom-nav-btn {
+    opacity: 0.8;
+  }
+
+  .main-swiper:hover .custom-nav-btn {
+    opacity: 0.8;
+  }
+
+  .custom-nav-btn:active {
+    background-color: rgba(82, 79, 79, 1) !important;
+  }
 }
 </style>

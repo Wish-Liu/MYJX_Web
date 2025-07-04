@@ -148,33 +148,38 @@ const openProductDetail = (item) => {
 .product-grid {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
 }
+
 .product-item {
   width: 50%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 10px;
+  gap: 20px;
+  padding: 20px;
   background-color: #ffffff;
 }
+
 .product-itemtwo {
   width: 50%;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: end;
-  /* background-color: #ff13ff; */
+  padding: 20px;
 }
+
 .product-itemtwo span:first-child {
-  font-size: 20px;
+  font-size: clamp(16px, 3vw, 20px);
   font-weight: bold;
   color: #000000;
   margin-left: 30px;
 }
+
 .product-itemtwo span:last-child {
-  font-size: 16px;
+  font-size: clamp(14px, 2.5vw, 16px);
   font-weight: bold;
   color: #5a5959;
   border-bottom: 1px solid #000000;
@@ -183,27 +188,111 @@ const openProductDetail = (item) => {
   margin-left: 30px;
   margin-bottom: 40px;
 }
+
 .product-itemtwo span:last-child:hover {
   color: #000000;
 }
+
 .product-detail {
   width: 100%;
   height: 100vh;
   /* background-color: #db194a; */
 }
+
 .product-item-div {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  padding: 10px;
+  transition: transform 0.3s ease;
 }
+
+.product-item-div:hover {
+  transform: translateY(-5px);
+}
+
+.product-item-div img {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  object-fit: contain;
+}
+
 .product-item-div-text {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: start;
-  margin-left: 220px;
+  padding: 15px 0;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 1024px) {
+  .product-grid {
+    flex-direction: column;
+  }
+
+  .product-item,
+  .product-itemtwo {
+    width: 100%;
+  }
+
+  .product-item {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .product-item {
+    grid-template-columns: 1fr;
+    padding: 15px;
+  }
+
+  .product-item-div img {
+    max-width: 250px;
+  }
+
+  .product-itemtwo {
+    padding: 15px;
+  }
+
+  .product-itemtwo span:first-child {
+    margin-left: 15px;
+  }
+
+  .product-itemtwo span:last-child {
+    margin-left: 15px;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .product-item {
+    padding: 10px;
+  }
+
+  .product-item-div img {
+    max-width: 200px;
+  }
+
+  .product-item-div-text {
+    padding: 10px 0;
+  }
+}
+
+/* 处理横屏模式 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .product-grid {
+    flex-direction: row;
+  }
+
+  .product-item,
+  .product-itemtwo {
+    width: 50%;
+  }
 }
 </style>
