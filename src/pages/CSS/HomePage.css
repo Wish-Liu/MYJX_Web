@@ -48,6 +48,7 @@ background-position: center;
   display: flex;
   justify-content: start;
   align-items: center;
+  cursor: pointer;
 }
 
 
@@ -342,4 +343,5 @@ background-position: center;
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
+
 

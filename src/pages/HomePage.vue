@@ -79,7 +79,10 @@ onUnmounted(() => {
         </div>
       </div>
       <!-- 商品展示 -->
-      <div class="main-two"></div>
+      <div
+        class="main-two"
+        @click="router.push({ path: '/Series', query: { title: '蚂蚁系列' } })"
+      ></div>
       <!-- 加入Surprise Ant的智能世界 -->
       <div class="main-three">
         <div class="join-surprise">
