@@ -25,21 +25,18 @@ const AntSeries = [
   {
     id: 1,
     name: "蚂蚁系列 耳机",
-    subtitle: "",
     price: 3980,
     image: antSeries1,
   },
   {
     id: 2,
     name: "蚂蚁系列 项链",
-    subtitle: "",
     price: 2980,
     image: antSeries2,
   },
   {
     id: 3,
     name: "蚂蚁系列 戒指",
-    subtitle: "",
     price: 2980,
     image: antSeries3,
   },
@@ -73,6 +70,33 @@ onMounted(() => {
 
 // 打开产品详情
 const openProductDetail = (item) => {
+  // 取出已有历史
+  const historyStr = localStorage.getItem("history");
+  let historyArr = [];
+
+  if (historyStr) {
+    try {
+      historyArr = JSON.parse(historyStr);
+      if (!Array.isArray(historyArr)) {
+        historyArr = [];
+      }
+    } catch (e) {
+      historyArr = [];
+    }
+  }
+  // 去重：如果已有相同商品，先删除旧的
+  historyArr = historyArr.filter((i) => i.id !== item.id);
+  // 新的放最前面
+  historyArr.unshift(item);
+  // 限制最多30条
+  if (historyArr.length > 30) {
+    historyArr = historyArr.slice(0, 30);
+  }
+
+  // 保存回localStorage
+  localStorage.setItem("history", JSON.stringify(historyArr));
+
+  // 跳转页面
   router.push({
     path: "/commodity",
     query: {

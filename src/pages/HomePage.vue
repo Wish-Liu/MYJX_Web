@@ -11,6 +11,11 @@ import router from "@/utils/router";
 import antSeries1 from "@/assets/首页/轮播.png";
 import antSeries2 from "@/assets/首页/轮播2.png";
 import antSeries3 from "@/assets/首页/轮播3.png";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 const showBackTop = ref(false);
 const result = [
   {
@@ -49,6 +54,29 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
+
+// 轮播图配置
+const swiperOptions = {
+  modules: [Autoplay, Pagination, Navigation],
+  loop: true,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+    bulletClass: "custom-bullet",
+    bulletActiveClass: "custom-bullet-active",
+    renderBullet: (index, className) => {
+      return `<span class="${className}"></span>`;
+    },
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+};
 </script>
 
 <template>
@@ -62,20 +90,21 @@ onUnmounted(() => {
       <!-- 轮播图 -->
       <div class="main-one">
         <div class="main-one-content">
-          <el-carousel
-            height="100vh"
-            :interval="3000"
-            arrow="hover"
-            indicator-position="onne"
-          >
-            <el-carousel-item v-for="item in result" :key="item.id">
-              <el-image
+          <swiper class="main-swiper" v-bind="swiperOptions">
+            <swiper-slide v-for="item in result" :key="item.id">
+              <img
                 :src="item.image"
-                fit="cover"
-                style="width: 100%; height: 100%; object-fit: cover"
+                class="slide-image"
+                alt="轮播图"
+                style="width: 100%; height: 100vh; object-fit: cover"
               />
-            </el-carousel-item>
-          </el-carousel>
+            </swiper-slide>
+            <!-- 分页指示器 -->
+            <div class="swiper-pagination"></div>
+            <!-- 导航按钮 -->
+            <div class="swiper-button-prev custom-nav-btn"></div>
+            <div class="swiper-button-next custom-nav-btn"></div>
+          </swiper>
         </div>
       </div>
       <!-- 商品展示 -->
@@ -197,3 +226,94 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+/* 轮播图 */
+.main-one {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.main-one-content {
+  width: 100%;
+  height: 100%;
+}
+
+.main-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+/* 分页器样式 */
+:deep(.swiper-pagination) {
+  bottom: 30px !important;
+}
+
+:deep(.custom-bullet) {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  border-radius: 50%;
+  background: rgba(131, 130, 130, 0.4);
+  margin: 0 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+:deep(.custom-bullet-active) {
+  background: url("@/assets/图标/蚂蚁按钮16X15.png") no-repeat center center;
+  background-size: contain;
+  opacity: 1;
+}
+
+/* 导航按钮样式 */
+.custom-nav-btn {
+  width: 40px !important;
+  height: 40px !important;
+  background-color: rgba(189, 184, 184, 0.9) !important;
+  border-radius: 50%;
+  opacity: 0; /* 默认隐藏 */
+  transition: opacity 0.3s ease; /* 添加过渡效果 */
+}
+
+/* 鼠标悬停时显示导航按钮 */
+.main-swiper:hover .custom-nav-btn {
+  opacity: 1;
+}
+
+:deep(.swiper-button-prev) {
+  left: 20px !important;
+}
+
+:deep(.swiper-button-next) {
+  right: 20px !important;
+}
+
+:deep(.swiper-button-prev::after),
+:deep(.swiper-button-next::after) {
+  font-size: 18px !important;
+  color: #fff;
+}
+
+/* 导航按钮悬停效果 */
+.custom-nav-btn:hover {
+  background-color: rgba(82, 79, 79, 1) !important; /* 悬停时加深背景色 */
+}
+
+/* 悬停效果 */
+:deep(.custom-bullet:hover) {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+:deep(.custom-bullet-active:hover) {
+  background: url("@/assets/图标/蚂蚁按钮16X15.png") no-repeat center center;
+  background-size: contain;
+}
+</style>
