@@ -1,5 +1,5 @@
 // router/index.js
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import HomePage from '@/pages/HomePage.vue'
 import Series from '@/pages/Series/Series.vue'
 import DataPage from '@/pages/Series/DataPage.vue'
@@ -31,7 +31,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(), // 或 createWebHashHistory()
+  history: createWebHashHistory(),
   routes
 })
 

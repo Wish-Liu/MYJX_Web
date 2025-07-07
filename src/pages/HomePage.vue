@@ -3,6 +3,8 @@ import { Message, Apple, CaretTop } from "@element-plus/icons-vue";
 import "./CSS/HomePage.css";
 import backgroundImage from "../assets/images/beij.png";
 import logo from "../assets/images/logo.png";
+import gmail from "../assets/images/底部邮件24X24.png";
+import apple from "../assets/images/底部苹果22X22.png";
 import google from "../assets/images/底部谷歌20X20.png";
 import facebook from "../assets/images/底部FB20X20.png";
 import line from "../assets/images/在线咨询130X32.png";
@@ -187,12 +189,16 @@ const map = {
           <span>语言：简体中文</span>
         </div>
         <div class="social-icons">
-          <el-icon>
-            <Message />
-          </el-icon>
-          <el-icon>
-            <Apple />
-          </el-icon>
+          <el-image
+            :src="gmail"
+            fit="cover"
+            style="width: 20px; height: 20px; cursor: pointer"
+          />
+          <el-image
+            :src="apple"
+            fit="cover"
+            style="width: 20px; height: 20px; cursor: pointer"
+          />
           <el-image
             :src="google"
             fit="cover"
