@@ -73,7 +73,7 @@ const headphoneSeries = [
 ];
 const seriesMap = {
   蚂蚁系列: AntSeries,
-  吊桶仓系列: lipstickSeries,
+  口红管系列: lipstickSeries,
   耳机仓系列: headphoneSeries,
   // 可继续添加其他系列，如：
   // "蜂鸟系列": BeeSeries,
@@ -204,7 +204,6 @@ const openProductDetail = (item) => {
 .product-grid {
   display: flex;
   flex-direction: row;
-  min-height: 100vh;
   width: 100%;
 }
 

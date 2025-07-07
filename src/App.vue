@@ -109,14 +109,18 @@ img {
 }
 .app-root {
   height: 100vh;
+  height: -webkit-fill-available; /* Safari 100vh 修复 */
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  -webkit-overflow-scrolling: touch; /* Safari 滚动优化 */
 }
 
 .app-content {
   flex: 1;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Safari 滚动优化 */
+  overscroll-behavior-y: contain; /* 防止橡皮筋效果 */
 }
 .header {
   position: fixed;
@@ -129,6 +133,9 @@ img {
   transition: transform 0.3s ease, opacity 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   will-change: transform, opacity;
+  /* Safari 性能优化 */
+  -webkit-transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
 }
 
 .header.hide {

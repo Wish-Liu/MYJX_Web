@@ -16,9 +16,10 @@
   padding: 0 clamp(10px, 3vw, 20px);
   box-sizing: border-box;
   position: sticky;
-  top: 0;
-  z-index: 100;
+  top: 45px;
+  z-index: 99;
   border-bottom: 1px solid #e0e0e0;
+  margin-top: 0;
 }
 .ant-series-nav-title {
   display: flex;
@@ -49,7 +50,8 @@
 @media screen and (max-width: 768px) {
   .ant-series-nav {
     padding: 0 10px;
-    margin-top: 60px;
+    top: 50px;
+    margin-top: 0;
   }
 
   .ant-series-nav-title {
@@ -60,7 +62,8 @@
 @media screen and (max-width: 480px) {
   .ant-series-nav {
     height: 50px;
-    margin-top: 50px;
+    top: 40px;
+    margin-top: 0;
   }
 
   .ant-series-nav-title,

@@ -62,7 +62,6 @@
 .menu-title {
   font-weight: 500;
   font-size: clamp(16px, 3vw, 18px);
-  margin-bottom: clamp(10px, 2vw, 15px);
   color: #333;
 }
 

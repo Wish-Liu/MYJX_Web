@@ -72,7 +72,7 @@ const onSlideChange = (swiper) => {
 const map = {
   0: "蚂蚁系列",
   1: "耳机仓系列",
-  2: "吊桶仓系列",
+  2: "口红管系列",
 };
 </script>
 
