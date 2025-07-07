@@ -51,7 +51,7 @@ const AntSeries = [
 const lipstickSeries = [
   {
     id: "bucket_1",
-    name: "吊桶仓系列 耳机",
+    name: "口红管系列 耳机",
     price: 2980,
     image: lipstickSeries1,
   },

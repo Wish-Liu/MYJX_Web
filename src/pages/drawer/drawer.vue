@@ -67,9 +67,9 @@ const res = [
         },
       },
       {
-        title: "吊桶仓系列",
+        title: "口红管系列",
         subTitle: {
-          title: "吊桶仓系列",
+          title: "口红管系列",
           img: SuspendedSilo,
           path: "/SuspendedSilo",
         },
