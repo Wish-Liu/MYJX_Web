@@ -101,7 +101,7 @@ body {
 =================================== */
 .footer {
   background-color: #E5E5E5;
-  padding: 0;
+  padding: 0 !important;
   width: 100%;
 }
 

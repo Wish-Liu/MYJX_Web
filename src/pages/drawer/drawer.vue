@@ -75,9 +75,9 @@ const res = [
         },
       },
       {
-        title: "耳机盒系列",
+        title: "耳机仓系列",
         subTitle: {
-          title: "耳机盒系列",
+          title: "耳机仓系列",
           img: earphoneCase,
           path: "/EarphoneCase",
         },

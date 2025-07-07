@@ -1,7 +1,13 @@
 <script setup>
+//蚂蚁系列
 import antSeries1 from "@/assets/蚂蚁系列/耳机/2绿色详情大图600X600.png";
 import antSeries2 from "@/assets/蚂蚁系列/项链/1项链详情图500X500.png";
 import antSeries3 from "@/assets/蚂蚁系列/戒指/2银戒指详情图600X600.png";
+//吊桶仓系列
+import lipstickSeries1 from "@/assets/吊筒仓系列/吊桶耳机360X334.png";
+//耳机仓系列
+import headphoneSeries1 from "@/assets/耳机盒系列/1银耳机仓详情图700X700.png";
+import headphoneSeries2 from "@/assets/耳机盒系列/2彩色耳机仓详情图700X700.png";
 import router from "@/utils/router";
 import { onMounted, ref, watch } from "vue";
 
@@ -23,34 +29,66 @@ watch(
 // 蚂蚁系列数据
 const AntSeries = [
   {
-    id: 1,
+    id: "ant_1",
     name: "蚂蚁系列 耳机",
     price: 3980,
     image: antSeries1,
   },
   {
-    id: 2,
+    id: "ant_2",
     name: "蚂蚁系列 项链",
     price: 2980,
     image: antSeries2,
   },
   {
-    id: 3,
+    id: "ant_3",
     name: "蚂蚁系列 戒指",
     price: 2980,
     image: antSeries3,
   },
 ];
+//吊桶仓系列
+const lipstickSeries = [
+  {
+    id: "bucket_1",
+    name: "吊桶仓系列 耳机",
+    price: 2980,
+    image: lipstickSeries1,
+  },
+];
+//耳机仓系列
+const headphoneSeries = [
+  {
+    id: "headphone_1",
+    name: "耳机仓系列 银",
+    price: 2980,
+    image: headphoneSeries1,
+  },
+  {
+    id: "headphone_2",
+    name: "耳机仓系列 彩色",
+    price: 2980,
+    image: headphoneSeries2,
+  },
+];
+const seriesMap = {
+  蚂蚁系列: AntSeries,
+  吊桶仓系列: lipstickSeries,
+  耳机仓系列: headphoneSeries,
+  // 可继续添加其他系列，如：
+  // "蜂鸟系列": BeeSeries,
+  // "鲸鱼系列": WhaleSeries,
+};
 
-// 加载数据的函数
 const loadSeriesData = () => {
   const title = router.currentRoute.value.query.title;
-  if (title === "蚂蚁系列") {
-    Series.value = [...AntSeries];
-    // 发送初始长度
+  const matchedSeries = seriesMap[title];
+
+  if (matchedSeries) {
+    Series.value = [...matchedSeries];
     emit("update-length", Series.value.length);
   } else {
-    Series.value = []; // 清空数据
+    Series.value = [];
     emit("update-length", 0);
   }
 };
@@ -77,24 +115,42 @@ const openProductDetail = (item) => {
   if (historyStr) {
     try {
       historyArr = JSON.parse(historyStr);
+      // console.log("当前历史记录数量:", historyArr.length);
+      // console.log("历史记录内容:", historyArr);
+
       if (!Array.isArray(historyArr)) {
+        // console.warn("历史记录不是数组，重置为空数组");
         historyArr = [];
       }
     } catch (e) {
+      // console.error("解析历史记录出错:", e);
       historyArr = [];
     }
   }
+
+  // 检查新添加的商品
+  // console.log("新添加商品:", item);
+
   // 去重：如果已有相同商品，先删除旧的
+  const beforeLength = historyArr.length;
   historyArr = historyArr.filter((i) => i.id !== item.id);
+  if (beforeLength !== historyArr.length) {
+    // console.log("移除了重复商品");
+  }
+
   // 新的放最前面
   historyArr.unshift(item);
+  console.log("添加新商品后数量:", historyArr.length);
+
   // 限制最多30条
   if (historyArr.length > 30) {
     historyArr = historyArr.slice(0, 30);
+    // console.log("裁剪到30条后数量:", historyArr.length);
   }
 
   // 保存回localStorage
   localStorage.setItem("history", JSON.stringify(historyArr));
+  // console.log("最终保存的历史记录数量:", historyArr.length);
 
   // 跳转页面
   router.push({

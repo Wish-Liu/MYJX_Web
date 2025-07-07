@@ -15,10 +15,10 @@
   align-items: center;
   padding: 0 clamp(10px, 3vw, 20px);
   box-sizing: border-box;
-  position: fixed;
-  top: clamp(50px, 8vh, 80px);
+  position: sticky;
+  top: 0;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #e0e0e0;
 }
 .ant-series-nav-title {
   display: flex;
@@ -49,6 +49,7 @@
 @media screen and (max-width: 768px) {
   .ant-series-nav {
     padding: 0 10px;
+    margin-top: 60px;
   }
 
   .ant-series-nav-title {
@@ -59,7 +60,7 @@
 @media screen and (max-width: 480px) {
   .ant-series-nav {
     height: 50px;
-    top: 50px;
+    margin-top: 50px;
   }
 
   .ant-series-nav-title,
@@ -72,7 +73,7 @@
 @media screen and (max-height: 500px) and (orientation: landscape) {
   .ant-series-nav {
     height: 40px;
-    top: 40px;
+    margin-top: 40px;
   }
 }
 

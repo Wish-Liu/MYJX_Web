@@ -42,6 +42,59 @@ import antSeries23 from "@/assets/蚂蚁系列/项链/2项链详情图600X600.pn
 import antSeries24 from "@/assets/蚂蚁系列/项链/3项链详情图500X500.png";
 import antSeries25 from "@/assets/蚂蚁系列/项链/4项链详情图600X600.png";
 import antSeries34 from "@/assets/蚂蚁系列/项链/小框项链70X70.png";
+//吊筒仓图片
+import lipstickSeries1 from "@/assets/吊筒仓系列/4吊桶详情图600X600.png";
+import lipstickSeries2 from "@/assets/吊筒仓系列/4粉吊桶详情图800X800.png";
+import lipstickSeries3 from "@/assets/吊筒仓系列/4金吊桶详情图800X800.png";
+
+//银吊筒仓图片
+import lipstickSeries4 from "@/assets/吊筒仓系列/4吊桶详情图600X600.png";
+import lipstickSeries5 from "@/assets/吊筒仓系列/1银吊桶详情图600X600.png";
+import lipstickSeries6 from "@/assets/吊筒仓系列/2银吊桶详情图600X600.png";
+import lipstickSeries7 from "@/assets/吊筒仓系列/3银吊桶详情图600X600.png";
+//金吊筒仓图片
+import lipstickSeries8 from "@/assets/吊筒仓系列/4金吊桶详情图800X800.png";
+import lipstickSeries9 from "@/assets/吊筒仓系列/1金吊桶详情图600X600.png";
+import lipstickSeries10 from "@/assets/吊筒仓系列/2金吊桶详情图600X600.png";
+import lipstickSeries11 from "@/assets/吊筒仓系列/3金吊桶详情图600X600.png";
+//粉吊筒仓图片
+import lipstickSeries12 from "@/assets/吊筒仓系列/4粉吊桶详情图800X800.png";
+import lipstickSeries13 from "@/assets/吊筒仓系列/1粉吊桶详情图600X600.png";
+import lipstickSeries14 from "@/assets/吊筒仓系列/2粉吊桶详情图600X600.png";
+import lipstickSeries15 from "@/assets/吊筒仓系列/3粉吊桶详情图600X600.png";
+//绿戒指包装
+import packagIng1 from "@/assets/包装/绿戒指包装/1绿700x700.png";
+import packagIng2 from "@/assets/包装/绿戒指包装/2绿750x750.png";
+import packagIng3 from "@/assets/包装/绿戒指包装/3绿700x700.png";
+//绿蚂蚁包装
+import packaging4 from "@/assets/包装/绿蚂蚁包装/1绿700x700.png";
+import packaging5 from "@/assets/包装/绿蚂蚁包装/2绿700x700.png";
+import packaging6 from "@/assets/包装/绿蚂蚁包装/3绿700x700.png";
+//项链包装
+import packaging7 from "@/assets/包装/项链包装/1项链700x700.png";
+import packaging8 from "@/assets/包装/项链包装/2项链800x800.png";
+import packaging9 from "@/assets/包装/项链包装/3项链700x700.png";
+//耳机仓系列 银
+import headphoneSeries1 from "@/assets/耳机盒系列/3银耳机仓详情图700X700.png";
+import headphoneSeries2 from "@/assets/耳机盒系列/3金耳机仓详情图700X700.png";
+import headphoneSeries3 from "@/assets/耳机盒系列/3粉耳机仓详情图700X700.png";
+//耳机仓系列 银 -银
+import headphoneSeries4 from "@/assets/耳机盒系列/3银耳机仓详情图700X700.png";
+import headphoneSeries5 from "@/assets/耳机盒系列/2银耳机仓详情图700X700.png";
+import headphoneSeries6 from "@/assets/耳机盒系列/1银耳机仓详情图700X700.png";
+//耳机仓系列 银 -金
+import headphoneSeries7 from "@/assets/耳机盒系列/3金耳机仓详情图700X700.png";
+import headphoneSeries8 from "@/assets/耳机盒系列/2金耳机仓详情图700X700.png";
+import headphoneSeries9 from "@/assets/耳机盒系列/1金耳机仓详情图700X700.png";
+//耳机仓系列 银 -粉
+import headphoneSeries10 from "@/assets/耳机盒系列/3粉耳机仓详情图700X700.png";
+import headphoneSeries11 from "@/assets/耳机盒系列/2粉耳机仓详情图700X700.png";
+import headphoneSeries12 from "@/assets/耳机盒系列/1粉耳机仓详情图700X700.png";
+//耳机仓系列 彩色
+import headphoneSeries13 from "@/assets/耳机盒系列/4彩色耳机仓详情图700X700.png";
+import headphoneSeries14 from "@/assets/耳机盒系列/2彩色耳机仓详情图700X700.png";
+import headphoneSeries15 from "@/assets/耳机盒系列/3彩色耳机仓详情图700X700.png";
+import headphoneSeries16 from "@/assets/耳机盒系列/1彩色耳机仓详情图600X600.png";
 
 // 导入Swiper相关组件
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -75,6 +128,7 @@ watch(
 );
 // 数据
 const result = [
+  //蚂蚁系列 耳机
   {
     id: 1,
     name: "蚂蚁系列 耳机",
@@ -115,6 +169,18 @@ const result = [
       {
         id: 3,
         image: antSeries9,
+      },
+      {
+        id: 4,
+        image: packaging4,
+      },
+      {
+        id: 5,
+        image: packaging5,
+      },
+      {
+        id: 6,
+        image: packaging6,
       },
     ],
     purple: [
@@ -160,6 +226,7 @@ const result = [
       },
     ],
   },
+  //蚂蚁系列 项链
   {
     id: 2,
     name: "蚂蚁系列 项链",
@@ -197,6 +264,18 @@ const result = [
         id: 4,
         image: antSeries25,
       },
+      {
+        id: 5,
+        image: packaging7,
+      },
+      {
+        id: 6,
+        image: packaging8,
+      },
+      {
+        id: 7,
+        image: packaging9,
+      },
     ],
     model: [
       {
@@ -213,6 +292,7 @@ const result = [
       },
     ],
   },
+  //蚂蚁系列 戒指
   {
     id: 3,
     name: "蚂蚁系列 戒指",
@@ -265,6 +345,18 @@ const result = [
       {
         id: 6,
         image: antSeries40,
+      },
+      {
+        id: 7,
+        image: packagIng1,
+      },
+      {
+        id: 8,
+        image: packagIng2,
+      },
+      {
+        id: 9,
+        image: packagIng3,
       },
     ],
     golden: [
@@ -334,6 +426,244 @@ const result = [
       },
     ],
   },
+  //吊桶仓系列 耳机
+  {
+    id: 4,
+    name: "吊桶仓系列 耳机",
+    subtitle:
+      "蚂蚁系列智能戒指。轻若无物，却掌控全局——蚂蚁智能戒指，重新定义穿戴体验。",
+    describe:
+      "蚂蚁系列智能戒指，指尖上的智慧健康伴侣3.5g超轻设计，24小时无感佩戴，支持血氧、心率、体温、睡眠多维健康监测。50米防水，15种运动自动识别。磁吸快充30分钟续航7天。不锈钢材质，闪耀金、月光银、玫瑰金三色可选。",
+    price: 3980,
+    StyleGuide: "穿戴式",
+    tax: true, //true-含税，false-不含税
+    serialNumber: "A09-2",
+    manufacturing: "中国大陆",
+    gender: "男女皆宜",
+    material: "不锈钢",
+    ProductImage: [
+      {
+        id: 1,
+        image: lipstickSeries1,
+      },
+      {
+        id: 2,
+        image: lipstickSeries2,
+      },
+      {
+        id: 3,
+        image: lipstickSeries3,
+      },
+    ],
+    silver: [
+      {
+        id: 1,
+        image: lipstickSeries4,
+      },
+      {
+        id: 2,
+        image: lipstickSeries5,
+      },
+      {
+        id: 3,
+        image: lipstickSeries6,
+      },
+      {
+        id: 4,
+        image: lipstickSeries7,
+      },
+    ],
+    golden: [
+      {
+        id: 1,
+        image: lipstickSeries8,
+      },
+      {
+        id: 2,
+        image: lipstickSeries9,
+      },
+      {
+        id: 3,
+        image: lipstickSeries10,
+      },
+      {
+        id: 4,
+        image: lipstickSeries11,
+      },
+    ],
+    pink: [
+      {
+        id: 1,
+        image: lipstickSeries12,
+      },
+      {
+        id: 2,
+        image: lipstickSeries13,
+      },
+      {
+        id: 3,
+        image: lipstickSeries14,
+      },
+      {
+        id: 4,
+        image: lipstickSeries15,
+      },
+    ],
+    model: [
+      {
+        id: 1,
+        image: antSeries13,
+      },
+      {
+        id: 2,
+        image: antSeries14,
+      },
+      {
+        id: 3,
+        image: antSeries15,
+      },
+    ],
+  },
+  //耳机仓系列 银
+  {
+    id: 5,
+    name: "耳机仓系列 银",
+    subtitle:
+      "蚂蚁系列智能戒指。轻若无物，却掌控全局——蚂蚁智能戒指，重新定义穿戴体验。",
+    describe:
+      "蚂蚁系列智能戒指，指尖上的智慧健康伴侣3.5g超轻设计，24小时无感佩戴，支持血氧、心率、体温、睡眠多维健康监测。50米防水，15种运动自动识别。磁吸快充30分钟续航7天。不锈钢材质，闪耀金、月光银、玫瑰金三色可选。",
+    price: 3980,
+    StyleGuide: "穿戴式",
+    tax: true, //true-含税，false-不含税
+    serialNumber: "A09-2",
+    manufacturing: "中国大陆",
+    gender: "男女皆宜",
+    material: "不锈钢",
+    ProductImage: [
+      {
+        id: 1,
+        image: headphoneSeries1,
+      },
+      {
+        id: 2,
+        image: headphoneSeries3,
+      },
+      {
+        id: 3,
+        image: headphoneSeries2,
+      },
+    ],
+    silver: [
+      {
+        id: 1,
+        image: headphoneSeries4,
+      },
+      {
+        id: 2,
+        image: headphoneSeries5,
+      },
+      {
+        id: 3,
+        image: headphoneSeries6,
+      },
+    ],
+    golden: [
+      {
+        id: 1,
+        image: headphoneSeries7,
+      },
+      {
+        id: 2,
+        image: headphoneSeries8,
+      },
+      {
+        id: 3,
+        image: headphoneSeries9,
+      },
+    ],
+    pink: [
+      {
+        id: 1,
+        image: headphoneSeries10,
+      },
+      {
+        id: 2,
+        image: headphoneSeries11,
+      },
+      {
+        id: 3,
+        image: headphoneSeries12,
+      },
+    ],
+    model: [
+      {
+        id: 1,
+        image: antSeries13,
+      },
+      {
+        id: 2,
+        image: antSeries14,
+      },
+      {
+        id: 3,
+        image: antSeries15,
+      },
+    ],
+  },
+  //耳机仓系列 彩色
+  {
+    id: 6,
+    name: "耳机仓系列 彩色",
+    subtitle:
+      "蚂蚁系列智能戒指。轻若无物，却掌控全局——蚂蚁智能戒指，重新定义穿戴体验。",
+    describe:
+      "蚂蚁系列智能戒指，指尖上的智慧健康伴侣3.5g超轻设计，24小时无感佩戴，支持血氧、心率、体温、睡眠多维健康监测。50米防水，15种运动自动识别。磁吸快充30分钟续航7天。不锈钢材质，闪耀金、月光银、玫瑰金三色可选。",
+    price: 3980,
+    StyleGuide: "穿戴式",
+    tax: true, //true-含税，false-不含税
+    serialNumber: "A09-2",
+    manufacturing: "中国大陆",
+    gender: "男女皆宜",
+    material: "不锈钢",
+    ProductImage: [
+      {
+        id: 1,
+        image: headphoneSeries13,
+      },
+    ],
+    colours: [
+      {
+        id: 1,
+        image: headphoneSeries13,
+      },
+      {
+        id: 2,
+        image: headphoneSeries14,
+      },
+      {
+        id: 3,
+        image: headphoneSeries15,
+      },
+      {
+        id: 4,
+        image: headphoneSeries16,
+      },
+    ],
+    model: [
+      {
+        id: 1,
+        image: antSeries13,
+      },
+      {
+        id: 2,
+        image: antSeries14,
+      },
+      {
+        id: 3,
+        image: antSeries15,
+      },
+    ],
+  },
 ];
 // 当前数据
 const currentData = ref(null);
@@ -352,6 +682,9 @@ const defaultColorMap = {
   "蚂蚁系列 项链": "silver",
   "蚂蚁系列 耳机": "green",
   "蚂蚁系列 戒指": "silver",
+  "吊桶仓系列 耳机": "silver",
+  "耳机仓系列 银": "silver",
+  "耳机仓系列 彩色": "colours",
 };
 // 加载数据的函数
 const loadSeriesData = async () => {
@@ -378,7 +711,7 @@ const loadSeriesData = async () => {
     isLoading.value = false;
   }
 };
-//
+// 图片点击映射
 const productImageMap = {
   "蚂蚁系列 项链": () => currentData.value?.silver,
   "蚂蚁系列 耳机": (index) => {
@@ -388,6 +721,21 @@ const productImageMap = {
   },
   "蚂蚁系列 戒指": (index) => {
     const map = ["silver", "golden", "pink"];
+    const key = map[index];
+    return currentData.value?.[key];
+  },
+  "吊桶仓系列 耳机": (index) => {
+    const map = ["silver", "pink", "golden"];
+    const key = map[index];
+    return currentData.value?.[key];
+  },
+  "耳机仓系列 银": (index) => {
+    const map = ["silver", "pink", "golden"];
+    const key = map[index];
+    return currentData.value?.[key];
+  },
+  "耳机仓系列 彩色": (index) => {
+    const map = ["colours"];
     const key = map[index];
     return currentData.value?.[key];
   },
