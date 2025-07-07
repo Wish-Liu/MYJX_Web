@@ -31,30 +31,6 @@ const result = [
     image: antSeries3,
   },
 ];
-// 监听滚动
-const handleScroll = () => {
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  const viewportHeight = window.innerHeight;
-  showBackTop.value = scrollTop > viewportHeight * 0.7;
-};
-
-// 回到顶部
-const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
-};
-
-// 生命周期钩子
-onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
-});
-
-onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
-});
-
 // 轮播图配置
 const swiperOptions = {
   modules: [Autoplay, Pagination, Navigation],
@@ -215,15 +191,6 @@ const swiperOptions = {
       <el-row justify="space-between" align="middle">
         <!-- 在线咨询 -->
         <el-image :src="line" fit="cover" class="line-image" />
-
-        <!-- 回到顶部 -->
-        <div
-          class="back-to-top"
-          :class="{ show: showBackTop }"
-          @click="scrollToTop"
-        >
-          <el-icon><CaretTop /></el-icon>
-        </div>
       </el-row>
     </div>
   </div>
@@ -235,7 +202,6 @@ const swiperOptions = {
   width: 100%;
   height: 100vh;
   position: relative;
-  overflow: hidden;
 }
 
 .main-one-content {

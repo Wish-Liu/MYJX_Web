@@ -1,13 +1,13 @@
 <script setup>
 import { Operation, Search, User, ShoppingBag } from "@element-plus/icons-vue";
 import logo from "./assets/images/logo.png";
-import { ref } from "vue";
+import { useScrollHideHeader } from "@/components/useScrollHideHeader";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 import drawer from "./pages/drawer/drawer.vue";
 import router from "./utils/router";
 
 // 抽屉控制
 const drawers = ref(false);
-
 // 菜单点击处理
 const handleMenuClick = () => {
   drawers.value = true;
@@ -23,15 +23,46 @@ const handleLogoClick = () => {
   //清空路由栈
   router.replace("/");
 };
+
+const scrollContainer = ref(null);
+let lastScrollTop = 0;
+const { isHeaderVisible, showBackTop, scrollToTop } =
+  useScrollHideHeader(scrollContainer);
+// 滚动事件处理
+const handleScroll = () => {
+  if (!scrollContainer.value) return;
+  const scrollTop = scrollContainer.value.scrollTop;
+  console.log("scrollTop:", scrollTop);
+
+  if (scrollTop - lastScrollTop > 10 && scrollTop > 100) {
+    isHeaderVisible.value = false;
+  } else if (lastScrollTop - scrollTop > 10) {
+    isHeaderVisible.value = true;
+  }
+
+  lastScrollTop = scrollTop;
+};
+
+onMounted(() => {
+  if (scrollContainer.value) {
+    scrollContainer.value.addEventListener("scroll", handleScroll);
+  }
+});
+
+onBeforeUnmount(() => {
+  if (scrollContainer.value) {
+    scrollContainer.value.removeEventListener("scroll", handleScroll);
+  }
+});
 </script>
 
 <template>
-  <div style="height: 100%; width: 100%">
+  <div style="height: 100%; width: 100%" class="app-root">
     <!-- 全局抽屉组件 -->
     <drawer v-model:drawer="drawers" @update:drawer="handleClose" />
 
     <!-- 全局导航栏 -->
-    <el-header class="header">
+    <el-header class="header" :class="{ hide: !isHeaderVisible }">
       <div class="header-content">
         <div class="left-section" @click="handleMenuClick">
           <el-icon>
@@ -62,9 +93,12 @@ const handleLogoClick = () => {
     </el-header>
 
     <!-- 路由页面内容 -->
-    <div class="app-content">
+    <div class="app-content" ref="scrollContainer">
       <router-view />
     </div>
+    <el-icon v-if="showBackTop" class="back-top" @click="scrollToTop">
+      <CaretTop />
+    </el-icon>
   </div>
 </template>
 
@@ -73,6 +107,54 @@ img {
   user-select: none;
   -webkit-user-drag: none;
 }
+.app-root {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-content {
+  flex: 1;
+  overflow-y: auto;
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background-color: white;
+  z-index: 1000;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  will-change: transform, opacity;
+}
+
+.header.hide {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.back-top {
+  position: fixed;
+  right: 40px;
+  bottom: 60px;
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.back-top:hover {
+  background-color: #333;
+}
+
 /* 全局导航栏样式 */
 .header {
   padding: 0px 20px;
@@ -145,10 +227,6 @@ img {
   color: #282b42;
 }
 
-/* 为路由内容添加顶部边距，避免被固定导航栏遮挡 */
-.app-content {
-  margin-top: 80px;
-}
 @media screen and (max-width: 1440px) {
   .SurpriseArt {
     width: 200px;
