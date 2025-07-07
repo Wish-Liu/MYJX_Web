@@ -38,7 +38,7 @@ const swiperOptions = {
   grabCursor: true,
   simulateTouch: true,
   autoplay: {
-    delay: 3000,
+    delay: 5000,
     disableOnInteraction: false,
   },
   pagination: {
@@ -55,6 +55,23 @@ const swiperOptions = {
     prevEl: ".swiper-button-prev",
   },
 };
+const currentIndex = ref(0);
+
+const onSwiper = (swiper) => {
+  // swiper 实例
+  // console.log("Swiper instance:", swiper);
+};
+
+const onSlideChange = (swiper) => {
+  currentIndex.value = swiper.realIndex; // realIndex 是真实索引（loop模式下）
+  // console.log("当前激活索引:", currentIndex.value);
+};
+//映射表
+const map = {
+  0: "蚂蚁系列",
+  1: "耳机仓系列",
+  2: "吊桶仓系列",
+};
 </script>
 
 <template>
@@ -68,13 +85,24 @@ const swiperOptions = {
       <!-- 轮播图 -->
       <div class="main-one">
         <div class="main-one-content">
-          <swiper class="main-swiper" v-bind="swiperOptions">
+          <swiper
+            class="main-swiper"
+            v-bind="swiperOptions"
+            @swiper="onSwiper"
+            @slideChange="onSlideChange"
+          >
             <swiper-slide v-for="item in result" :key="item.id">
               <img
                 :src="item.image"
                 class="slide-image"
                 alt="轮播图"
                 style="width: 100%; height: 100vh; object-fit: cover"
+                @click="
+                  router.push({
+                    path: '/Series',
+                    query: { title: map[currentIndex] },
+                  })
+                "
               />
             </swiper-slide>
             <!-- 分页指示器 -->

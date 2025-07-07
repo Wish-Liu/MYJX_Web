@@ -32,7 +32,7 @@ const { isHeaderVisible, showBackTop, scrollToTop } =
 const handleScroll = () => {
   if (!scrollContainer.value) return;
   const scrollTop = scrollContainer.value.scrollTop;
-  console.log("scrollTop:", scrollTop);
+  // console.log("scrollTop:", scrollTop);
 
   if (scrollTop - lastScrollTop > 10 && scrollTop > 100) {
     isHeaderVisible.value = false;
