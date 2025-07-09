@@ -19,6 +19,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 const showBackTop = ref(false);
+//轮播图
 const result = [
   {
     id: 1,
@@ -39,9 +40,32 @@ const swiperOptions = {
   loop: true,
   grabCursor: true,
   simulateTouch: true,
+  touchRatio: 1,
+  touchAngle: 45,
+  longSwipes: true,
+  longSwipesRatio: 0.5,
+  longSwipesMs: 300,
+  followFinger: true,
+  allowTouchMove: true,
+  threshold: 0,
+  touchMoveStopPropagation: false,
+  touchStartPreventDefault: false,
+  touchStartForcePreventDefault: false,
+  touchReleaseOnEdges: false,
+  uniqueNavElements: true,
+  resistance: true,
+  resistanceRatio: 0.85,
+  watchSlidesProgress: false,
+  watchSlidesVisibility: false,
+  preventClicks: true,
+  preventClicksPropagation: true,
+  slideToClickedSlide: false,
   autoplay: {
     delay: 5000,
     disableOnInteraction: false,
+    pauseOnMouseEnter: true,
+    stopOnLastSlide: false,
+    waitForTransition: true,
   },
   pagination: {
     el: ".swiper-pagination",
@@ -55,6 +79,20 @@ const swiperOptions = {
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
+  },
+  breakpoints: {
+    // 当屏幕宽度 >= 768px 时
+    768: {
+      allowTouchMove: true,
+      touchRatio: 1,
+    },
+    // 当屏幕宽度 < 768px 时
+    0: {
+      allowTouchMove: true,
+      touchRatio: 1.5,
+      longSwipes: true,
+      longSwipesRatio: 0.3,
+    },
   },
 };
 const currentIndex = ref(0);
@@ -77,15 +115,15 @@ const map = {
 </script>
 
 <template>
-  <div style="height: 100%; width: 100%">
+  <div class="homepage-container">
     <!-- 主内容区 -->
     <div class="content-wrapper">
       <!-- 头部大图 -->
-      <div class="header-img">
+      <section class="header-img">
         <el-image :src="backgroundImage" fit="cover" />
-      </div>
+      </section>
       <!-- 轮播图 -->
-      <div class="main-one">
+      <section class="main-one">
         <div class="main-one-content">
           <swiper
             class="main-swiper"
@@ -98,7 +136,7 @@ const map = {
                 :src="item.image"
                 class="slide-image"
                 alt="轮播图"
-                style="width: 100%; height: 100vh; object-fit: cover"
+                style="width: 100%; height: 100%; object-fit: cover"
                 @click="
                   router.push({
                     path: '/Series',
@@ -114,14 +152,14 @@ const map = {
             <div class="swiper-button-next custom-nav-btn"></div>
           </swiper>
         </div>
-      </div>
+      </section>
       <!-- 商品展示 -->
-      <div
+      <section
         class="main-two"
         @click="router.push({ path: '/Series', query: { title: '蚂蚁系列' } })"
-      ></div>
+      ></section>
       <!-- 加入Surprise Ant的智能世界 -->
-      <div class="main-three">
+      <section class="main-three">
         <div class="join-surprise">
           <div class="title-wrapper">
             <el-row justify="center" align="middle">
@@ -131,7 +169,7 @@ const map = {
           </div>
           <div class="dotted-line">********************************</div>
         </div>
-      </div>
+      </section>
     </div>
 
     <!-- 底部 -->
@@ -231,248 +269,5 @@ const map = {
 </template>
 
 <style scoped>
-/* 轮播图 */
-.main-one {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-}
-
-.main-one-content {
-  width: 100%;
-  height: 100%;
-}
-
-.main-swiper {
-  width: 100%;
-  height: 100%;
-}
-
-.slide-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* 分页器样式 */
-:deep(.swiper-pagination) {
-  bottom: 30px !important;
-}
-
-:deep(.custom-bullet) {
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-  border-radius: 50%;
-  background: rgba(131, 130, 130, 0.4);
-  margin: 0 5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-:deep(.custom-bullet-active) {
-  background: url("@/assets/图标/蚂蚁按钮16X15.png") no-repeat center center;
-  background-size: contain;
-  opacity: 1;
-}
-
-/* 导航按钮样式 */
-.custom-nav-btn {
-  width: 40px !important;
-  height: 40px !important;
-  background-color: rgba(189, 184, 184, 0.9) !important;
-  border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-/* 鼠标悬停时显示导航按钮 */
-.main-swiper:hover .custom-nav-btn {
-  opacity: 1;
-}
-
-:deep(.swiper-button-prev) {
-  left: 20px !important;
-}
-
-:deep(.swiper-button-next) {
-  right: 20px !important;
-}
-
-:deep(.swiper-button-prev::after),
-:deep(.swiper-button-next::after) {
-  font-size: 18px !important;
-  color: #fff;
-}
-
-/* 导航按钮悬停效果 */
-.custom-nav-btn:hover {
-  background-color: rgba(82, 79, 79, 1) !important;
-}
-
-/* 悬停效果 */
-:deep(.custom-bullet:hover) {
-  background-color: rgba(255, 255, 255, 0.6);
-}
-
-:deep(.custom-bullet-active:hover) {
-  background: url("@/assets/图标/蚂蚁按钮16X15.png") no-repeat center center;
-  background-size: contain;
-}
-
-/* 响应式设计 - 大屏幕 */
-@media screen and (min-width: 1440px) {
-  .main-one {
-    height: 100vh;
-  }
-
-  .slide-image {
-    height: 100%;
-    max-height: 100vh;
-  }
-
-  .custom-nav-btn {
-    width: 50px !important;
-    height: 50px !important;
-  }
-
-  :deep(.swiper-button-prev::after),
-  :deep(.swiper-button-next::after) {
-    font-size: 22px !important;
-  }
-}
-
-/* 响应式设计 - 平板设备 */
-@media screen and (max-width: 1024px) {
-  .main-one {
-    height: 80vh;
-    min-height: 500px; /* 设置最小高度 */
-  }
-
-  .slide-image {
-    height: 100%;
-    min-height: 500px;
-  }
-
-  .custom-nav-btn {
-    width: 35px !important;
-    height: 35px !important;
-  }
-
-  :deep(.custom-bullet) {
-    width: 14px;
-    height: 14px;
-  }
-
-  :deep(.swiper-button-prev::after),
-  :deep(.swiper-button-next::after) {
-    font-size: 16px !important;
-  }
-}
-
-/* 响应式设计 - 手机设备 */
-@media screen and (max-width: 768px) {
-  .main-one {
-    height: 100vw; /* 改用vw单位 */
-  }
-
-  .slide-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* 改用contain确保图片完整显示 */
-  }
-
-  .custom-nav-btn {
-    width: 30px !important;
-    height: 30px !important;
-    opacity: 0.8;
-  }
-
-  :deep(.custom-bullet) {
-    width: 12px;
-    height: 12px;
-    margin: 0 3px;
-  }
-
-  :deep(.swiper-button-prev),
-  :deep(.swiper-button-next) {
-    top: 50% !important;
-  }
-
-  :deep(.swiper-button-prev) {
-    left: 10px !important;
-  }
-
-  :deep(.swiper-button-next) {
-    right: 10px !important;
-  }
-
-  :deep(.swiper-button-prev::after),
-  :deep(.swiper-button-next::after) {
-    font-size: 14px !important;
-  }
-}
-
-/* 响应式设计 - 小屏手机 */
-@media screen and (max-width: 480px) {
-  .main-one {
-    height: 100vw;
-  }
-
-  .slide-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .custom-nav-btn {
-    width: 25px !important;
-    height: 25px !important;
-  }
-
-  :deep(.custom-bullet) {
-    width: 10px;
-    height: 10px;
-    margin: 0 2px;
-  }
-
-  :deep(.swiper-button-prev::after),
-  :deep(.swiper-button-next::after) {
-    font-size: 12px !important;
-  }
-}
-
-/* 处理横屏模式 */
-@media screen and (max-height: 500px) and (orientation: landscape) {
-  .main-one {
-    height: 100vh;
-    min-height: auto; /* 移除最小高度限制 */
-  }
-
-  .slide-image {
-    height: 100%;
-    width: 100%;
-    object-fit: contain; /* 横屏模式使用contain确保图片完整显示 */
-  }
-
-  :deep(.swiper-pagination) {
-    bottom: 15px !important;
-  }
-}
-
-/* 优化触摸交互 */
-@media (hover: none) {
-  .custom-nav-btn {
-    opacity: 0.8;
-  }
-
-  .main-swiper:hover .custom-nav-btn {
-    opacity: 0.8;
-  }
-
-  .custom-nav-btn:active {
-    background-color: rgba(82, 79, 79, 1) !important;
-  }
-}
+/* 样式已全部移至 src/pages/CSS/HomePage.css 文件中 */
 </style>

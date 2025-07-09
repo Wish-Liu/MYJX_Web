@@ -1,12 +1,28 @@
 /* ===================================
    1. 全局基础样式
 =================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
   background-color: #ffffff;
   min-height: 100vh;
-  overflow-x: hidden;
+}
+
+/* ===================================
+   2. 页面容器样式 - 修复双滚动条问题
+=================================== */
+.homepage-container {
+  width: 100%;
+  /* 移除 height: 100% 以避免双滚动条 */
+  margin: 0;
+  padding: 0;
+  position: relative;
 }
 
 .content-wrapper {
@@ -14,38 +30,138 @@ body {
   height: auto;
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
 /* ===================================
-   2. 主要内容区域样式
+   3. 头部大图 - 全屏显示
 =================================== */
 .header-img {
   width: 100%;
   height: 100vh;
-  min-height: 500px;
+  min-height: 100vh;
   position: relative;
   margin: 0;
   padding: 0;
+}
+
+.header-img .el-image {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .header-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
 /* ===================================
-   3. 主要内容区域样式
+   4. 轮播图区域 - 全屏显示
 =================================== */
+.main-one {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
 
-/* 商品展示 */
+.main-one-content {
+  width: 100%;
+  height: 100%;
+}
+
+.main-swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Swiper分页器样式 */
+.swiper-pagination {
+  bottom: 30px !important;
+}
+
+.custom-bullet {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  border-radius: 50%;
+  background: rgba(131, 130, 130, 0.4);
+  margin: 0 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-bullet-active {
+  background: url("@/assets/图标/蚂蚁按钮16X15.png") no-repeat center center;
+  background-size: contain;
+  opacity: 1;
+}
+
+.custom-bullet:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}
+
+.custom-bullet-active:hover {
+  background: url("@/assets/图标/蚂蚁按钮16X15.png") no-repeat center center;
+  background-size: contain;
+}
+
+/* Swiper导航按钮样式 */
+.custom-nav-btn {
+  width: 40px !important;
+  height: 40px !important;
+  background-color: rgba(189, 184, 184, 0.9) !important;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.main-swiper:hover .custom-nav-btn {
+  opacity: 1;
+}
+
+.swiper-button-prev {
+  left: 20px !important;
+}
+
+.swiper-button-next {
+  right: 20px !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 18px !important;
+  color: #fff;
+}
+
+.custom-nav-btn:hover {
+  background-color: rgba(82, 79, 79, 1) !important;
+}
+
+/* ===================================
+   5. 商品展示区域 - 全屏显示
+=================================== */
 .main-two {
   background-image: url("@/assets/首页/模特.png");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   width: 100%;
   height: 100vh;
-  min-height: 500px;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
   display: flex;
@@ -61,6 +177,9 @@ body {
   object-fit: cover;
 }
 
+/* ===================================
+   6. 其他内容区域
+=================================== */
 /* Join Surprise 区域 */
 .main-three {
   min-height: 90px;
@@ -97,7 +216,7 @@ body {
 }
 
 /* ===================================
-   4. 页面底部样式
+   7. 页面底部样式
 =================================== */
 .footer {
   background-color: #E5E5E5;
@@ -192,7 +311,7 @@ body {
 }
 
 /* ===================================
-   5. 工具栏样式
+   8. 工具栏样式
 =================================== */
 .bottom-tools {
   position: fixed;
@@ -212,13 +331,72 @@ body {
   cursor: pointer;
 }
 
+/* ===================================
+   9. 全局滚动条样式 - 确保只有一个滚动条
+=================================== */
+/* 为页面主体添加滚动条样式 */
+html::-webkit-scrollbar {
+  width: 8px;
+}
 
+html::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 移除其他容器的滚动条样式，确保只使用页面级滚动 */
+/* ::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+} */
 
 /* ===================================
-   6. 响应式设计
+   10. 响应式设计 - 大屏幕设备
 =================================== */
 /* 大屏幕设备 (1440px 及以上) */
 @media screen and (min-width: 1440px) {
+  .header-img,
+  .main-one,
+  .main-two {
+    height: 100vh;
+    min-height: 100vh;
+  }
+
+  .custom-nav-btn {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 22px !important;
+  }
+
+  .custom-bullet {
+    width: 16px;
+    height: 16px;
+  }
+
   .footer-content {
     max-width: 1400px;
   }
@@ -232,12 +410,30 @@ body {
   }
 }
 
-/* 平板设备 (768px - 1023px) */
-@media screen and (max-width: 1023px) {
+/* ===================================
+   11. 响应式设计 - 平板设备
+=================================== */
+@media screen and (max-width: 1024px) {
   .header-img,
+  .main-one,
   .main-two {
-    height: 80vh;
-    min-height: 400px;
+    height: 100vh;
+    min-height: 90vh;
+  }
+
+  .custom-nav-btn {
+    width: 45px !important;
+    height: 45px !important;
+  }
+
+  .custom-bullet {
+    width: 14px;
+    height: 14px;
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 18px !important;
   }
 
   .footer-content {
@@ -259,14 +455,76 @@ body {
   }
 }
 
-/* 手机设备 (768px 以下) */
-@media screen and (max-width: 767px) {
+/* ===================================
+   12. 响应式设计 - 手机设备
+=================================== */
+@media screen and (max-width: 768px) {
   .header-img,
+  .main-one,
   .main-two {
-    height: 70vh;
-    min-height: 350px;
+    height: 100vh;
+    min-height: 80vh;
   }
 
+  .main-swiper {
+    width: 100%;
+    height: 100%;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+  }
+
+  /* 手机端导航按钮优化 */
+  .custom-nav-btn {
+    width: 40px !important;
+    height: 40px !important;
+    opacity: 0.9;
+    background-color: rgba(255, 255, 255, 0.8) !important;
+  }
+
+  .custom-nav-btn:active {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    transform: scale(0.95);
+  }
+
+  /* 手机端分页指示器优化 */
+  .swiper-pagination {
+    bottom: 20px !important;
+  }
+
+  .custom-bullet {
+    width: 12px;
+    height: 12px;
+    margin: 0 4px;
+    padding: 4px;
+  }
+
+  .custom-bullet-active {
+    background: url("@/assets/图标/蚂蚁按钮16X15.png") no-repeat center center !important;
+    background-size: 12px 12px !important;
+  }
+
+  .swiper-button-prev {
+    left: 15px !important;
+  }
+
+  .swiper-button-next {
+    right: 15px !important;
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 16px !important;
+  }
+
+  /* 其他页面元素 */
   .main-three {
     min-height: 70px;
     padding: 15px 0;
@@ -325,12 +583,31 @@ body {
   }
 }
 
-/* 小屏手机设备 (480px 以下) */
-@media screen and (max-width: 479px) {
+/* ===================================
+   13. 响应式设计 - 小屏手机
+=================================== */
+@media screen and (max-width: 480px) {
   .header-img,
+  .main-one,
   .main-two {
-    height: 60vh;
-    min-height: 300px;
+    height: 100vh;
+    min-height: 70vh;
+  }
+
+  .custom-nav-btn {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .custom-bullet {
+    width: 10px;
+    height: 10px;
+    margin: 0 3px;
+  }
+
+  .swiper-button-prev::after,
+  .swiper-button-next::after {
+    font-size: 14px !important;
   }
 
   .main-three {
@@ -354,11 +631,36 @@ body {
   }
 }
 
-/* 处理横屏模式 */
+/* ===================================
+   14. 特殊屏幕方向优化
+=================================== */
+/* 横屏模式优化 */
 @media screen and (max-height: 500px) and (orientation: landscape) {
   .header-img,
+  .main-one,
   .main-two {
-    height: 120vh;
+    height: 100vh;
+    min-height: 100vh;
+  }
+
+  .slide-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .swiper-pagination {
+    bottom: 15px !important;
+  }
+
+  .custom-nav-btn {
+    opacity: 0.8;
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .main-swiper:hover .custom-nav-btn {
+    opacity: 1;
   }
 
   .main-three {
@@ -366,32 +668,82 @@ body {
   }
 }
 
-/* 适配超高屏幕 */
+/* 手机横屏模式优化 */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .header-img,
+  .main-one,
+  .main-two {
+    height: 100vh;
+    min-height: 100vh;
+  }
+
+  .custom-nav-btn {
+    opacity: 0.8;
+  }
+
+  .main-swiper:hover .custom-nav-btn {
+    opacity: 1;
+  }
+}
+
+/* 手机竖屏模式优化 */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .header-img,
+  .main-one,
+  .main-two {
+    height: 100vh;
+    min-height: 100vh;
+  }
+
+  .swiper-pagination {
+    bottom: 25px !important;
+  }
+}
+
+/* 超高屏幕优化 */
 @media screen and (min-height: 1000px) {
   .header-img,
+  .main-one,
   .main-two {
-    height: 90vh;
+    height: 100vh;
+    min-height: 100vh;
   }
 }
 
 /* ===================================
-   7. 滚动条样式
+   15. 触摸设备优化
 =================================== */
-::-webkit-scrollbar {
-  width: 8px;
+@media (hover: none) {
+  .custom-nav-btn {
+    opacity: 0.8;
+  }
+
+  .main-swiper:hover .custom-nav-btn {
+    opacity: 0.8;
+  }
+
+  .custom-nav-btn:active {
+    background-color: rgba(82, 79, 79, 1) !important;
+  }
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
+/* ===================================
+   16. 优化后的显示设置 - 修复双滚动条问题
+=================================== */
+@media screen {
+  /* 移除导致布局问题的全屏样式 */
+  /* .header-img, .main-one, .main-two 保持原有样式，不使用100vw设置 */
+  
+  /* 修复容器宽度问题 */
+  .homepage-container {
+    width: 100%;
+    /* 移除 overflow-x: hidden，让页面自然滚动 */
+  }
 
-::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  .content-wrapper {
+    width: 100%;
+    /* 移除 overflow-x: hidden，让页面自然滚动 */
+  }
 }
 
 

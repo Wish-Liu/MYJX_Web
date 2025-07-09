@@ -3,15 +3,27 @@ html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
+  /* 确保使用页面级滚动 */
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-html, body, #app {
+html, body {
   width: 100%;
-  height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* 防止水平滚动 */
+  /* 移除 overflow-x: hidden 重复设置 */
 } 
+
+/* 应用根容器 - 移除高度限制，允许内容自然扩展 */
+#app {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* 最小高度为视口高度，但允许超出 */
+  /* 确保应用容器不创建滚动 */
+  overflow: visible;
+}
 
 /* 图片基础样式 */
 img {
@@ -26,6 +38,26 @@ img {
 /* 基础动画过渡 */
 * {
   transition: all 0.3s ease;
+}
+
+/* 全局滚动条样式 - 只为页面级滚动添加样式 */
+html::-webkit-scrollbar {
+  width: 8px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }
 
 /* 移动端基础优化 */

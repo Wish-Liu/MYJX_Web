@@ -1,13 +1,20 @@
 <script setup>
-import { Operation, Search, User, ShoppingBag } from "@element-plus/icons-vue";
+import {
+  Operation,
+  Search,
+  User,
+  ShoppingBag,
+  CaretTop,
+} from "@element-plus/icons-vue";
 import logo from "./assets/images/logo.png";
 import { useScrollHideHeader } from "@/components/useScrollHideHeader";
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref } from "vue";
 import drawer from "./pages/drawer/drawer.vue";
 import router from "./utils/router";
 
 // 抽屉控制
 const drawers = ref(false);
+
 // 菜单点击处理
 const handleMenuClick = () => {
   drawers.value = true;
@@ -20,175 +27,121 @@ const handleClose = (message) => {
 
 // 点击logo处理
 const handleLogoClick = () => {
-  //清空路由栈
+  // 清空路由栈，回到首页
   router.replace("/");
 };
 
-const scrollContainer = ref(null);
-let lastScrollTop = 0;
-const { isHeaderVisible, showBackTop, scrollToTop } =
-  useScrollHideHeader(scrollContainer);
-// 滚动事件处理
-const handleScroll = () => {
-  if (!scrollContainer.value) return;
-  const scrollTop = scrollContainer.value.scrollTop;
-  // console.log("scrollTop:", scrollTop);
-
-  if (scrollTop - lastScrollTop > 10 && scrollTop > 100) {
-    isHeaderVisible.value = false;
-  } else if (lastScrollTop - scrollTop > 10) {
-    isHeaderVisible.value = true;
-  }
-
-  lastScrollTop = scrollTop;
-};
-
-onMounted(() => {
-  if (scrollContainer.value) {
-    scrollContainer.value.addEventListener("scroll", handleScroll);
-  }
-});
-
-onBeforeUnmount(() => {
-  if (scrollContainer.value) {
-    scrollContainer.value.removeEventListener("scroll", handleScroll);
-  }
-});
+// 使用window滚动监听，不传入容器参数
+const { isHeaderVisible, showBackTop, scrollToTop } = useScrollHideHeader();
 </script>
 
 <template>
-  <div style="height: 100%; width: 100%" class="app-root">
+  <div class="app-root">
     <!-- 全局抽屉组件 -->
     <drawer v-model:drawer="drawers" @update:drawer="handleClose" />
 
     <!-- 全局导航栏 -->
-    <el-header class="header" :class="{ hide: !isHeaderVisible }">
+    <header class="header" :class="{ 'header--hidden': !isHeaderVisible }">
       <div class="header-content">
+        <!-- 左侧菜单区域 -->
         <div class="left-section" @click="handleMenuClick">
-          <el-icon>
+          <el-icon class="menu-icon">
             <Operation />
           </el-icon>
-          <el-text style="font-size: 18px">菜单</el-text>
+          <span class="menu-text">菜单</span>
         </div>
+
+        <!-- 中间Logo区域 -->
         <div class="center-section">
           <el-image
             :src="logo"
             alt="Surprise Art"
-            class="SurpriseArt"
+            class="logo-image"
             @click="handleLogoClick"
           />
         </div>
+
+        <!-- 右侧功能区域 -->
         <div class="right-section">
-          <el-icon>
+          <el-icon class="action-icon">
             <Search />
           </el-icon>
-          <el-icon>
+          <el-icon class="action-icon">
             <User />
           </el-icon>
-          <el-icon>
+          <el-icon class="action-icon">
             <ShoppingBag />
           </el-icon>
         </div>
       </div>
-    </el-header>
+    </header>
 
-    <!-- 路由页面内容 -->
-    <div class="app-content" ref="scrollContainer">
+    <!-- 主内容区域 -->
+    <main class="app-content">
       <router-view />
-    </div>
-    <el-icon v-if="showBackTop" class="back-top" @click="scrollToTop">
-      <CaretTop />
-    </el-icon>
+    </main>
+
+    <!-- 回到顶部按钮 -->
+    <Transition name="back-top">
+      <el-icon
+        v-if="showBackTop"
+        class="back-top"
+        @click="scrollToTop"
+        title="回到顶部"
+      >
+        <CaretTop />
+      </el-icon>
+    </Transition>
   </div>
 </template>
 
 <style scoped>
+/* 防止图片被选中和拖拽 */
 img {
   user-select: none;
   -webkit-user-drag: none;
 }
+
+/* 应用根容器 - 移除高度限制，让内容自然扩展 */
 .app-root {
-  height: 100vh;
-  height: -webkit-fill-available; /* Safari 100vh 修复 */
-  overflow: hidden;
+  min-height: 100vh; /* 最小高度为视口高度，但允许内容超出 */
+  width: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
-  -webkit-overflow-scrolling: touch; /* Safari 滚动优化 */
 }
 
-.app-content {
-  flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* Safari 滚动优化 */
-  overscroll-behavior-y: contain; /* 防止橡皮筋效果 */
-}
+/* 头部导航栏 */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: 60px;
-  background-color: white;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eee;
   z-index: 1000;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  will-change: transform, opacity;
   /* Safari 性能优化 */
+  will-change: transform;
   -webkit-transform: translateZ(0);
   -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
-.header.hide {
+.header--hidden {
   transform: translateY(-100%);
   opacity: 0;
   pointer-events: none;
 }
-.back-top {
-  position: fixed;
-  right: 40px;
-  bottom: 60px;
-  background-color: #000;
-  color: #fff;
-  padding: 10px;
-  border-radius: 50%;
-  font-size: 18px;
-  cursor: pointer;
-  z-index: 9999;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.3s ease;
-}
 
-.back-top:hover {
-  background-color: #333;
-}
-
-/* 全局导航栏样式 */
-.header {
-  padding: 0px 20px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #eee;
-  width: 100%;
-  box-sizing: border-box;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-.SurpriseArt {
-  width: 300px;
-  height: 50px;
-  cursor: pointer;
-}
-
+/* 头部内容容器 */
 .header-content {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 10px 0px 10px;
-  width: 100%;
   position: relative;
 }
 
@@ -196,18 +149,32 @@ img {
 .left-section {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  margin-right: px;
+  transition: color 0.3s ease;
+  user-select: none;
 }
 
 .left-section:hover {
   color: #282b42;
 }
 
-.left-section .el-icon {
-  font-size: 30px;
+.left-section:active {
+  transform: scale(0.98);
+}
+
+.menu-icon {
+  font-size: 28px;
+  transition: transform 0.2s ease;
+}
+
+.left-section:hover .menu-icon {
+  transform: scale(1.05);
+}
+
+.menu-text {
+  font-size: 18px;
+  font-weight: 500;
 }
 
 /* 中间Logo区域 */
@@ -217,76 +184,299 @@ img {
   transform: translateX(-50%);
 }
 
+.logo-image {
+  width: 280px;
+  height: 45px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+  transform: scale(1.02);
+}
+
+.logo-image:active {
+  transform: scale(0.98);
+}
+
 /* 右侧功能区域 */
 .right-section {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 25px;
 }
 
-.right-section .el-icon {
+.action-icon {
   font-size: 20px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, transform 0.2s ease;
+  border-radius: 50%;
 }
 
-.right-section .el-icon:hover {
+.action-icon:hover {
   color: #282b42;
+  background-color: rgba(40, 43, 66, 0.1);
+  transform: scale(1.1);
 }
 
-@media screen and (max-width: 1440px) {
-  .SurpriseArt {
-    width: 200px;
-    height: 30px;
-  }
+.action-icon:active {
+  transform: scale(0.95);
 }
 
-/* 响应式设计 */
-@media screen and (max-width: 768px) {
-  .header {
-    padding: 10px 5px;
-  }
+/* 主内容区域 - 关键修改：移除高度限制，使用window滚动 */
+.app-content {
+  width: 100%;
+  margin-top: 60px; /* 为固定头部预留空间 */
+  min-height: calc(100vh - 60px); /* 确保至少占满剩余视口高度 */
+  /* 移除 overflow 设置，让页面使用window的滚动 */
+}
 
+/* 回到顶部按钮 - 修复图标显示问题 */
+.back-top {
+  position: fixed;
+  right: 30px;
+  bottom: 60px;
+  width: 40px;
+  height: 40px;
+  background-color: #000000;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  /* 确保图标居中显示 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-top:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  font-size: 26px;
+}
+
+.back-top:active {
+  transform: translateY(0) scale(0.95);
+}
+
+/* 回到顶部按钮动画 */
+.back-top-enter-active,
+.back-top-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.back-top-enter-from,
+.back-top-leave-to {
+  opacity: 0;
+  transform: translateY(20px) scale(0.8);
+}
+
+/* 响应式设计 - 大屏幕优化 */
+@media screen and (min-width: 1440px) {
   .header-content {
-    padding: 0px 5px;
+    padding: 0 40px;
   }
 
-  .left-section {
-    gap: 5px;
+  .logo-image {
+    width: 320px;
+    height: 50px;
   }
 
-  .left-section .el-icon {
-    font-size: 24px;
+  .right-section {
+    gap: 30px;
+  }
+
+  .action-icon {
+    font-size: 22px;
+  }
+}
+
+/* 响应式设计 - 平板设备 */
+@media screen and (max-width: 1024px) {
+  .header-content {
+    padding: 0 15px;
+  }
+
+  .logo-image {
+    width: 240px;
+    height: 40px;
+  }
+
+  .menu-text {
+    font-size: 16px;
   }
 
   .right-section {
     gap: 20px;
   }
-
-  .right-section .el-icon {
-    font-size: 18px;
-  }
-  .SurpriseArt {
-    width: 150px;
-    height: 20px;
-  }
 }
 
-@media screen and (max-width: 480px) {
-  .header-content {
-    padding: 0px 5px;
+/* 响应式设计 - 手机设备 */
+@media screen and (max-width: 768px) {
+  .header {
+    height: 55px;
   }
 
-  .left-section .el-icon {
-    font-size: 20px;
+  .app-content {
+    margin-top: 55px;
+    min-height: calc(100vh - 55px);
+  }
+
+  .header-content {
+    padding: 0 10px;
+  }
+
+  .menu-icon {
+    font-size: 24px;
+  }
+
+  .menu-text {
+    font-size: 16px;
+  }
+
+  .logo-image {
+    width: 180px;
+    height: 32px;
   }
 
   .right-section {
     gap: 15px;
   }
-  .SurpriseArt {
-    width: 100px;
-    height: 15px;
+
+  .action-icon {
+    font-size: 18px;
+    padding: 6px;
   }
+
+  .back-top {
+    right: 20px;
+    bottom: 30px;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
+
+  .back-top:hover {
+    font-size: 22px;
+  }
+}
+
+/* 响应式设计 - 小屏手机 */
+@media screen and (max-width: 480px) {
+  .header {
+    height: 50px;
+  }
+
+  .app-content {
+    margin-top: 50px;
+    min-height: calc(100vh - 50px);
+  }
+
+  .header-content {
+    padding: 0 8px;
+  }
+
+  .menu-icon {
+    font-size: 22px;
+  }
+
+  .menu-text {
+    font-size: 14px;
+  }
+
+  .logo-image {
+    width: 150px;
+    height: 28px;
+  }
+
+  .right-section {
+    gap: 12px;
+  }
+
+  .action-icon {
+    font-size: 16px;
+    padding: 5px;
+  }
+
+  .back-top {
+    right: 15px;
+    bottom: 25px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .back-top:hover {
+    font-size: 20px;
+  }
+}
+
+/* 横屏模式优化 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .header {
+    height: 45px;
+  }
+
+  .app-content {
+    margin-top: 45px;
+    min-height: calc(100vh - 45px);
+  }
+
+  .logo-image {
+    width: 200px;
+    height: 30px;
+  }
+
+  .back-top {
+    right: 15px;
+    bottom: 15px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .back-top:hover {
+    font-size: 18px;
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) {
+  .left-section:hover,
+  .action-icon:hover,
+  .logo-image:hover,
+  .back-top:hover {
+    transform: none;
+    background-color: transparent;
+  }
+
+  .left-section:active {
+    opacity: 0.8;
+  }
+
+  .action-icon:active {
+    background-color: rgba(40, 43, 66, 0.1);
+    opacity: 0.8;
+  }
+}
+
+/* 减少动画以提升性能 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* 确保内容区域正确布局 */
+.app-content > * {
+  width: 100%;
 }
 </style>
