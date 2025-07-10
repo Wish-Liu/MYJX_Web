@@ -118,8 +118,8 @@ const swiperOptions = ref({
   resistanceRatio: 0.85,
   watchSlidesProgress: false,
   watchSlidesVisibility: false,
-  preventClicks: true,
-  preventClicksPropagation: true,
+  preventClicks: false, // 修改为false，允许点击
+  preventClicksPropagation: false, // 修改为false，允许点击事件传播
   slideToClickedSlide: false,
   autoplay: {
     delay: 5000,
@@ -253,13 +253,16 @@ watch([deviceType, screenOrientation], () => {
             @slideChange="onSlideChange"
           >
             <swiper-slide
-              v-for="item in isMobileDevice ? resultapp : result"
+              v-for="(item, index) in isMobileDevice ? resultapp : result"
               :key="item.id"
               class="main-swiper-slide"
             >
               <img
                 :src="item.image"
                 class="slide-image"
+                :class="{
+                  'slide-image-special': index === 1 && isMobileDevice,
+                }"
                 alt="轮播图"
                 @click="
                   router.push({
@@ -272,14 +275,8 @@ watch([deviceType, screenOrientation], () => {
             <!-- 分页指示器 -->
             <div class="swiper-pagination"></div>
             <!-- 导航按钮 - 电脑端和平板端显示 -->
-            <div
-              v-if="!isMobileDevice"
-              class="swiper-button-prev custom-nav-btn"
-            ></div>
-            <div
-              v-if="!isMobileDevice"
-              class="swiper-button-next custom-nav-btn"
-            ></div>
+            <div class="swiper-button-prev custom-nav-btn"></div>
+            <div class="swiper-button-next custom-nav-btn"></div>
           </swiper>
         </div>
       </section>

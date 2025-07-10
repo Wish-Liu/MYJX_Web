@@ -642,14 +642,14 @@ html::-webkit-scrollbar-thumb:hover {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 添加阴影 */
   }
 
-  /* 专门为第二张图片设置更大的显示空间 */
-  .main-swiper .swiper-slide:nth-child(2) .slide-image {
-    width: 100%; /* 使用全部宽度 */
-    height: 100%; /* 使用全部高度 */
-    object-fit: contain; /* 确保完整显示 */
-    object-position: center;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* 专门为第二张图片设置的特殊样式 */
+  .slide-image-special {
+    width: 100% !important; /* 使用全部宽度 */
+    height: 100% !important; /* 使用全部高度 */
+    object-fit: contain !important; /* 确保完整显示 */
+    object-position: center !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
   }
 
   /* 手机端轮播图容器调整 */
@@ -659,11 +659,6 @@ html::-webkit-scrollbar-thumb:hover {
     align-items: center;
     padding: 5px; /* 减少内边距给图片更多空间 */
     height: 100%; /* 确保slide使用全部高度 */
-  }
-
-  /* 为第二张图片的slide容器移除内边距 */
-  .main-swiper .swiper-slide:nth-child(2) {
-    padding: 0; /* 移除内边距，给图片最大空间 */
   }
 
   /* 手机端导航按钮优化 */
