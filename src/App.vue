@@ -174,7 +174,6 @@ img {
 
 .menu-text {
   font-size: 18px;
-  font-weight: 500;
 }
 
 /* 中间Logo区域 */
@@ -356,8 +355,8 @@ img {
   .back-top {
     right: 20px;
     bottom: 30px;
-    width: 45px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
     font-size: 20px;
   }
 
@@ -399,15 +398,15 @@ img {
   }
 
   .action-icon {
-    font-size: 16px;
+    font-size: 25px;
     padding: 5px;
   }
 
   .back-top {
     right: 15px;
-    bottom: 25px;
-    width: 40px;
-    height: 40px;
+    bottom: 45px;
+    width: 30px;
+    height: 30px;
     font-size: 18px;
   }
 

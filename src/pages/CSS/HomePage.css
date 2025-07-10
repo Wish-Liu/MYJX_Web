@@ -70,10 +70,32 @@ body {
   margin: 0;
   padding: 0;
 }
+.main-one-content-mobile{
+  width: 100%;
+  height: 25%; /* 减少以配合轮播图容器高度增加 */
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.main-two-content-mobile-title{
+  font-size: 1.6rem;
+}
+.main-two-content-mobile-body{
+  font-size: 1rem;
+  padding: 0 1rem;
+}
+.main-two-content-mobile-footer{
+  width: 16%;
+  cursor: pointer;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid #000000;
+}
 
 .main-one-content {
   width: 100%;
-  height: 100%;
+  height: 70%;
 }
 
 .main-swiper {
@@ -144,7 +166,7 @@ body {
 .swiper-button-prev::after,
 .swiper-button-next::after {
   font-size: 18px !important;
-  color: #fff;
+  color: #2b2a2a;
 }
 
 .custom-nav-btn:hover {
@@ -155,7 +177,7 @@ body {
    5. 商品展示区域 - 全屏显示
 =================================== */
 .main-two {
-  background-image: url("@/assets/首页/模特.png");
+  background-image: url("@/assets/首页/模特.png") ;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -175,6 +197,38 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.main-two-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: start;
+  padding-left: 2rem;
+  color: #ffffff;
+}
+
+.main-two-content-title{
+  width: 100%;
+  font-size: 25px;
+  margin-bottom: 1rem;
+}
+
+.main-two-content-body{
+  width: 100%;
+  font-size: 14px;
+  margin-bottom: 1rem;
+}
+
+.main-two-content-footer{
+  width: 20%;
+  font-size: 15px;
+  padding-bottom: 0.8rem;
+  margin-bottom: 5rem;
+  cursor: pointer;
+  border-bottom: 1px solid #ffffff;
 }
 
 /* ===================================
@@ -232,6 +286,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+
+.footer-logo{
+  width: 20rem;
+  height: 3rem;
+  object-fit: cover;
 }
 
 /* 主要内容区域 */
@@ -332,7 +392,45 @@ body {
 }
 
 /* ===================================
-   9. 全局滚动条样式 - 确保只有一个滚动条
+   9. 设备类型样式控制
+=================================== */
+/* 默认情况下隐藏手机端专用内容 */
+.main-one-content-mobile,
+.main-two-content {
+  display: none;
+}
+
+/* 响应式设备类名控制 */
+.device-mobile .main-one-content-mobile,
+.device-small-mobile .main-one-content-mobile,
+.device-mobile .main-two-content,
+.device-small-mobile .main-two-content {
+  display: flex !important;
+}
+
+.device-desktop .main-one-content-mobile,
+.device-tablet .main-one-content-mobile,
+.device-desktop .main-two-content,
+.device-tablet .main-two-content {
+  display: none !important;
+}
+
+/* 确保电脑端和平板端的轮播图内容容器正常显示 */
+.device-desktop .main-one-content,
+.device-tablet .main-one-content {
+  width: 100%;
+  height: 100%;
+}
+
+/* 手机端轮播图内容容器调整 */
+.device-mobile .main-one-content,
+.device-small-mobile .main-one-content {
+  width: 100%;
+  height: 75%; /* 增加高度以配合手机端设置 */
+}
+
+/* ===================================
+   10. 全局滚动条样式 - 确保只有一个滚动条
 =================================== */
 /* 为页面主体添加滚动条样式 */
 html::-webkit-scrollbar {
@@ -352,26 +450,9 @@ html::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
 
-/* 移除其他容器的滚动条样式，确保只使用页面级滚动 */
-/* ::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
-} */
 
 /* ===================================
-   10. 响应式设计 - 大屏幕设备
+   11. 响应式设计 - 大屏幕设备
 =================================== */
 /* 大屏幕设备 (1440px 及以上) */
 @media screen and (min-width: 1440px) {
@@ -400,6 +481,25 @@ html::-webkit-scrollbar-thumb:hover {
   .footer-content {
     max-width: 1400px;
   }
+
+  /* 确保电脑端轮播图正常显示 */
+  .slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* 电脑端不显示手机端专用内容 */
+  .main-one-content-mobile,
+  .main-two-content {
+    display: none !important;
+  }
+
+  .main-one-content {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 /* 中等屏幕设备 (1024px - 1439px) */
@@ -408,12 +508,26 @@ html::-webkit-scrollbar-thumb:hover {
     max-width: 960px;
     padding: 40px 30px;
   }
+
+  /* 确保中等屏幕轮播图正常显示 */
+  .slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* 中等屏幕不显示手机端专用内容 */
+  .main-one-content-mobile,
+  .main-two-content {
+    display: none !important;
+  }
 }
 
 /* ===================================
-   11. 响应式设计 - 平板设备
+   12. 响应式设计 - 平板设备
 =================================== */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px) and (min-width: 769px) {
   .header-img,
   .main-one,
   .main-two {
@@ -453,44 +567,115 @@ html::-webkit-scrollbar-thumb:hover {
   .title-wrapper h2 {
     font-size: 1.5rem;
   }
-}
 
+  /* 平板端轮播图正常显示 */
+  .slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* 平板端不显示手机端专用内容 */
+  .main-one-content-mobile,
+  .main-two-content {
+    display: none !important;
+  }
+
+  .main-one-content {
+    width: 100%;
+    height: 100%;
+  }
+}
 /* ===================================
-   12. 响应式设计 - 手机设备
+   13. 响应式设计 - 手机设备
 =================================== */
 @media screen and (max-width: 768px) {
   .header-img,
-  .main-one,
   .main-two {
+    background-image: url("@/assets/首页/底部渐变1440X533.png"),url("@/assets/APP/模特图375X626.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     height: 100vh;
     min-height: 80vh;
+  }
+  
+  .main-one {
+    /* 移除轮播图容器的背景图 */
+    background-color: #ffffff; /* 设置白色背景 */
+    height: 100vh;
+    min-height: 80vh;
+  }
+  
+  .main-one-content{
+    height: 75%; /* 增加轮播图容器高度 */
+  }
+  
+  .main-one-content img{
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff!important;
+    object-fit: cover;
   }
 
   .main-swiper {
     width: 100%;
     height: 100%;
+    min-height: 400px; /* 确保有足够高度显示完整图片 */
     touch-action: pan-y pinch-zoom;
   }
 
+  /* 手机端轮播图片大小调整 */
   .slide-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 90%;  /* 增加图片宽度到90% */
+    height: 90%; /* 增加图片高度到90% */
+    max-width: 320px;  /* 减少最大宽度以适应手机屏幕 */
+    max-height: 480px; /* 增加最大高度以显示完整图片 */
+    object-fit: contain; /* 确保完整显示图片 */
+    object-position: center;
     user-select: none;
     -webkit-user-drag: none;
     -webkit-touch-callout: none;
+    margin: auto; /* 居中显示 */
+    border-radius: 8px; /* 添加圆角 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+  }
+
+  /* 专门为第二张图片设置更大的显示空间 */
+  .main-swiper .swiper-slide:nth-child(2) .slide-image {
+    width: 100%; /* 使用全部宽度 */
+    height: 100%; /* 使用全部高度 */
+    object-fit: contain; /* 确保完整显示 */
+    object-position: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 手机端轮播图容器调整 */
+  .main-swiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px; /* 减少内边距给图片更多空间 */
+    height: 100%; /* 确保slide使用全部高度 */
+  }
+
+  /* 为第二张图片的slide容器移除内边距 */
+  .main-swiper .swiper-slide:nth-child(2) {
+    padding: 0; /* 移除内边距，给图片最大空间 */
   }
 
   /* 手机端导航按钮优化 */
   .custom-nav-btn {
-    width: 40px !important;
-    height: 40px !important;
+    width: 0.25rem !important;
+    height: 0.25rem !important;
     opacity: 0.9;
-    background-color: rgba(255, 255, 255, 0.8) !important;
+    background-color: rgba(158, 157, 157, 0.8) !important;
   }
 
   .custom-nav-btn:active {
-    background-color: rgba(255, 255, 255, 0.9) !important;
+    background-color: rgba(94, 91, 91, 0.9) !important;
     transform: scale(0.95);
   }
 
@@ -544,6 +729,20 @@ html::-webkit-scrollbar-thumb:hover {
     gap: 20px;
   }
 
+  .footer-text-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .footer-logo{
+    width: 12rem;
+    height: 2rem;
+    object-fit: cover;
+  }
+
   .footer-section {
     flex: 1 0 100%;
     text-align: center;
@@ -566,6 +765,70 @@ html::-webkit-scrollbar-thumb:hover {
     justify-content: center;
   }
 
+  .footer-bottom{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #E5E5E5;
+  }
+
+  .footer-section{
+    padding: 0 0.7rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    min-height: 3rem; /* 设置最小高度确保垂直居中 */
+  }
+
+  .footer-section span{
+    font-size: 1.2rem;
+    font-weight: 1rem;
+    line-height: 1.2; /* 设置行高 */
+    display: flex;
+    align-items: center; /* 文本垂直居中 */
+  }
+
+  .footer-section img{
+    width: 1.2rem;
+    height: 1.2rem;
+    flex-shrink: 0; /* 防止图片缩小 */
+    display: block; /* 确保图片正常显示 */
+  }
+
+  .location{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:start;
+  }
+
+  .location span{
+    font-size: 1rem;
+    font-weight: 1rem;
+    color: #000000;
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .social-icons{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:start;
+    margin-left: 0.5rem;
+  }
+
+  .social-icons img{
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
   /* 调整底部工具栏在移动端的位置和大小 */
   .bottom-tools {
     right: 10px;
@@ -573,61 +836,13 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .line-image {
-    width: 100px;
+    width: 105px;
     height: 25px;
   }
 
   .back-to-top {
     width: 35px;
     height: 35px;
-  }
-}
-
-/* ===================================
-   13. 响应式设计 - 小屏手机
-=================================== */
-@media screen and (max-width: 480px) {
-  .header-img,
-  .main-one,
-  .main-two {
-    height: 100vh;
-    min-height: 70vh;
-  }
-
-  .custom-nav-btn {
-    width: 35px !important;
-    height: 35px !important;
-  }
-
-  .custom-bullet {
-    width: 10px;
-    height: 10px;
-    margin: 0 3px;
-  }
-
-  .swiper-button-prev::after,
-  .swiper-button-next::after {
-    font-size: 14px !important;
-  }
-
-  .main-three {
-    min-height: 60px;
-  }
-
-  .title-wrapper h2 {
-    font-size: 1rem;
-  }
-
-  .footer-text-container {
-    height: 70px;
-  }
-
-  .footer-section h3 {
-    font-size: 14px;
-  }
-
-  .footer-section li {
-    font-size: 12px;
   }
 }
 
