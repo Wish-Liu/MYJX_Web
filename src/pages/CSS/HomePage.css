@@ -76,21 +76,43 @@ body {
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center; /* 改为居中对齐 */
   align-items: center;
+  padding: 0.8rem 1.2rem; /* 添加内边距 */
+  text-align: center; /* 文字居中 */
 }
+
 .main-two-content-mobile-title{
-  font-size: 1.6rem;
+  font-size: 1.8rem; /* 增加标题字体大小 */
+  font-weight: 600; /* 添加字体粗细 */
+  color: #333; /* 设置文字颜色 */
+  margin-bottom: 0.5rem; /* 添加底部间距 */
+  letter-spacing: 0.05em; /* 添加字间距 */
 }
+
 .main-two-content-mobile-body{
-  font-size: 1rem;
-  padding: 0 1rem;
+  font-size: 1rem; /* 微调正文字体大小 */
+  line-height: 1.6; /* 增加行高提高可读性 */
+  color: #666; /* 设置正文颜色 */
+  padding: 0 0.5rem; /* 减少左右内边距 */
+  margin-bottom: 1rem; /* 添加底部间距 */
+  max-width: 90%; /* 限制最大宽度 */
 }
+
 .main-two-content-mobile-footer{
-  width: 16%;
+  width: auto; /* 改为自适应宽度 */
+  font-size: 0.9rem; /* 调整字体大小 */
+  color: #333; /* 设置文字颜色 */
   cursor: pointer;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px solid #000000;
+  padding: 0.5rem 1rem; /* 增加内边距 */
+  border-bottom: 2px solid #333; /* 增加边框粗细 */
+  transition: all 0.3s ease; /* 添加过渡效果 */
+  font-weight: 500; /* 添加字体粗细 */
+}
+
+.main-two-content-mobile-footer:hover {
+  color: #666; /* 悬停时颜色变化 */
+  border-bottom-color: #666; /* 悬停时边框颜色变化 */
 }
 
 .main-one-content {
@@ -466,11 +488,16 @@ html::-webkit-scrollbar-thumb:hover {
   .custom-nav-btn {
     width: 50px !important;
     height: 50px !important;
+    z-index: 10 !important; /* 确保按钮在最上层 */
+    pointer-events: auto !important; /* 确保可以点击 */
+    opacity: 0; /* 默认隐藏，悬停时显示 */
+    transition: opacity 0.3s ease;
   }
 
   .swiper-button-prev::after,
   .swiper-button-next::after {
     font-size: 22px !important;
+    pointer-events: none; /* 防止伪元素阻止点击 */
   }
 
   .custom-bullet {
@@ -509,6 +536,14 @@ html::-webkit-scrollbar-thumb:hover {
     padding: 40px 30px;
   }
 
+  /* 中等屏幕导航按钮设置 */
+  .custom-nav-btn {
+    z-index: 10 !important; /* 确保按钮在最上层 */
+    pointer-events: auto !important; /* 确保可以点击 */
+    opacity: 0; /* 默认隐藏，悬停时显示 */
+    transition: opacity 0.3s ease;
+  }
+
   /* 确保中等屏幕轮播图正常显示 */
   .slide-image {
     width: 100%;
@@ -538,6 +573,10 @@ html::-webkit-scrollbar-thumb:hover {
   .custom-nav-btn {
     width: 45px !important;
     height: 45px !important;
+    z-index: 10 !important; /* 确保按钮在最上层 */
+    pointer-events: auto !important; /* 确保可以点击 */
+    opacity: 0; /* 默认隐藏，悬停时显示 */
+    transition: opacity 0.3s ease;
   }
 
   .custom-bullet {
@@ -548,6 +587,7 @@ html::-webkit-scrollbar-thumb:hover {
   .swiper-button-prev::after,
   .swiper-button-next::after {
     font-size: 18px !important;
+    pointer-events: none; /* 防止伪元素阻止点击 */
   }
 
   .footer-content {
@@ -864,13 +904,16 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .custom-nav-btn {
-    opacity: 0.8;
+    opacity: 0; /* 默认隐藏，悬停时显示 */
     width: 35px !important;
     height: 35px !important;
+    z-index: 10 !important; /* 确保按钮在最上层 */
+    pointer-events: auto !important; /* 确保可以点击 */
+    transition: opacity 0.3s ease;
   }
 
   .main-swiper:hover .custom-nav-btn {
-    opacity: 1;
+    opacity: 1; /* 悬停时完全显示 */
   }
 
   .main-three {
@@ -888,11 +931,14 @@ html::-webkit-scrollbar-thumb:hover {
   }
 
   .custom-nav-btn {
-    opacity: 0.8;
+    opacity: 0; /* 默认隐藏，悬停时显示 */
+    z-index: 10 !important; /* 确保按钮在最上层 */
+    pointer-events: auto !important; /* 确保可以点击 */
+    transition: opacity 0.3s ease;
   }
 
   .main-swiper:hover .custom-nav-btn {
-    opacity: 1;
+    opacity: 1; /* 悬停时完全显示 */
   }
 }
 
@@ -925,11 +971,13 @@ html::-webkit-scrollbar-thumb:hover {
 =================================== */
 @media (hover: none) {
   .custom-nav-btn {
-    opacity: 0.8;
+    opacity: 0.8; /* 触摸设备上保持可见 */
+    z-index: 10 !important; /* 确保按钮在最上层 */
+    pointer-events: auto !important; /* 确保可以点击 */
   }
 
   .main-swiper:hover .custom-nav-btn {
-    opacity: 0.8;
+    opacity: 0.8; /* 触摸设备上悬停效果相同 */
   }
 
   .custom-nav-btn:active {
