@@ -424,6 +424,15 @@ margin-top: 20px;
 .value {
   color: #333;
 }
+.recent-title {
+  width: 100%;
+  padding-left: 8rem;
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 700;
+  text-align: left;
+}
 
 @media screen and (max-width: 768px) {
   /* 移动端强制移除所有边框 */
@@ -718,7 +727,6 @@ margin-top: 20px;
   }
 
   .commodity-four-one .section-title::after {
-    content: '+';
     position: absolute;
     right: 0;
     top: 0;
@@ -760,7 +768,6 @@ margin-top: 20px;
     border: none;
     outline: none;
     padding: 15px 20px;
-    background-color: #b8cce8;
     box-sizing: border-box;
     position: relative;
     left: 0;
@@ -770,8 +777,6 @@ margin-top: 20px;
   }
 
   .commodity-four-two .section-title {
-    font-size: 18px;
-    font-weight: 500;
     color: #333;
     margin-bottom: 15px;
   }
@@ -840,11 +845,13 @@ margin-top: 20px;
   }
 
   .recent-title {
-    margin-left: 0;
+    width: 100%;
+    padding-left: 25px;
     font-size: 18px;
     margin-bottom: 15px;
     color: #333;
     font-weight: 500;
+    text-align: left;
   }
 
   .recent-swiper {
@@ -854,8 +861,12 @@ margin-top: 20px;
 
   .recent-slide {
     cursor: pointer;
-    width: calc(50% - 10px) !important;
-    margin-right: 10px;
+    width: calc(50% - 7.5px) !important;
+    margin-right: 0 !important;
+  }
+
+  .recent-slide:first-child {
+    margin-right: 15px !important;
   }
 
   .recent-item {
@@ -865,7 +876,7 @@ margin-top: 20px;
     padding: 12px;
     border-radius: 10px;
     transition: all 0.3s ease;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: url("@/assets/最近浏览/最近浏览渐变.png") no-repeat center center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     border: 1px solid #e8e8e8;
     margin: 0;

@@ -1,7 +1,7 @@
 <script setup>
 import { Message, Apple, CaretTop } from "@element-plus/icons-vue";
 import "./CSS/HomePage.css";
-import backgroundImage from "../assets/images/beij.png";
+import backgroundImage from "../assets/首页/Web首图.png";
 import logo from "../assets/images/logo.png";
 import gmail from "../assets/images/底部邮件24X24.png";
 import apple from "../assets/images/底部苹果22X22.png";

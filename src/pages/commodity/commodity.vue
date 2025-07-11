@@ -1039,7 +1039,7 @@ watch([deviceType, screenOrientation], ([newDeviceType, newOrientation]) => {
 
     <!-- 最近浏览 -->
     <div class="recent-views">
-      <h1 class="recent-title">最近浏览</h1>
+      <div class="recent-title">最近浏览</div>
       <div class="recent-container">
         <swiper class="recent-swiper" v-bind="recentSwiperOptions">
           <swiper-slide
@@ -1194,18 +1194,10 @@ watch([deviceType, screenOrientation], ([newDeviceType, newOrientation]) => {
   background: #fff;
 }
 
+
 .recent-container {
   height: 500px;
   position: relative;
-  margin-left: 40px;
-}
-
-.recent-title {
-  font-size: 30px;
-  font-weight: 500;
-  margin-bottom: 30px;
-  margin-left: 40px;
-  color: #333;
 }
 
 .recent-swiper {
