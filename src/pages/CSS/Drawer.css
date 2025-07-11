@@ -1,27 +1,47 @@
 /* ===================================
-   1. 加入Surprise区域样式
+   抽屉组件样式
 =================================== */
-.join-surprise {
-  text-align: center;
-  padding: clamp(15px, 3vw, 20px) 0;
-}
 
-.join-surprise h2 {
-  font-size: clamp(18px, 4vw, 24px);
-  color: #333;
-  margin-bottom: clamp(8px, 2vw, 10px);
-  line-height: 1.4;
-}
-
-.dotted-line {
-  color: #666;
-  letter-spacing: 2px;
-  font-size: clamp(12px, 2vw, 14px);
+/* ===================================
+   1. 基础变量和通用样式
+=================================== */
+:root {
+  --drawer-primary-color: #1890ff;
+  --drawer-text-color: #333;
+  --drawer-text-secondary: #666;
+  --drawer-text-muted: #999;
+  --drawer-border-color: #f0f0f0;
+  --drawer-border-light: #eee;
+  --drawer-bg-hover: #f8f8f8;
+  --drawer-bg-active: #e8f4fd;
+  --drawer-bg-section: #f5f5f5;
+  --drawer-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --drawer-transition: all 0.3s ease;
 }
 
 /* ===================================
-   2. 主抽屉基础样式
+   2. Element Plus Drawer 样式覆盖
 =================================== */
+:deep(.el-drawer__header) {
+  margin-bottom: 0;
+  padding: clamp(10px, 2vw, 15px);
+  border-bottom: none;
+}
+
+:deep(.el-drawer__body) {
+  padding: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===================================
+   3. 主抽屉基础样式
+=================================== */
+.main-drawer {
+  position: relative;
+  overflow: visible;
+}
+
 .drawer-content {
   padding: clamp(10px, 3vw, 20px);
   height: 100%;
@@ -43,26 +63,21 @@
   font-weight: 500;
 }
 
-/* Element Plus Drawer 样式覆盖 */
-:deep(.el-drawer__header) {
-  margin-bottom: 0;
-  padding: clamp(10px, 2vw, 15px);
-  border-bottom: none;
-}
-
-:deep(.el-drawer__body) {
-  padding: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+/* 通用图标样式 */
+.plus-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 50px;
+  flex-shrink: 0;
 }
 
 /* ===================================
-   3. 主菜单样式
+   4. 主菜单样式
 =================================== */
 .menu-title {
   font-weight: 500;
   font-size: clamp(16px, 3vw, 18px);
-  color: #333;
+  color: var(--drawer-text-color);
 }
 
 .menu-items {
@@ -72,11 +87,11 @@
 }
 
 .menu-items div {
-  color: #666;
+  color: var(--drawer-text-secondary);
   cursor: pointer;
   font-size: clamp(14px, 2.5vw, 16px);
   padding: clamp(8px, 1.5vw, 12px) 0;
-  transition: all 0.3s ease;
+  transition: var(--drawer-transition);
 }
 
 .menu-items div:hover {
@@ -84,33 +99,12 @@
   padding-left: 5px;
 }
 
-.menu-sectiontwo {
-  margin: clamp(40px, 8vh, 160px) 0;
-  padding-top: clamp(15px, 3vw, 20px);
-  border-top: 1px solid #eee;
-}
-
-.menu-row {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 10px 0;
-}
-
-/* ===================================
-   4. 主抽屉布局和交互
-=================================== */
-.main-drawer {
-  position: relative;
-  overflow: visible;
-}
-
 .menu-item {
   padding: 12px 0;
   cursor: pointer;
   transition: 0.2s;
   font-size: 16px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--drawer-border-color);
 }
 
 .menu-item:hover {
@@ -122,11 +116,41 @@
   font-weight: bold;
 }
 
+/* 菜单分区样式 */
+.menu-sectionone {
+  margin-bottom: 20px;
+}
+
 .menu-sectiontwo,
 .menu-sectionthree {
   margin-top: 30px;
   padding-top: 20px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--drawer-border-light);
+}
+
+.menu-sectiontwo {
+  margin: clamp(40px, 8vh, 160px) 0;
+  padding-top: clamp(15px, 3vw, 20px);
+  border-top: 1px solid var(--drawer-border-light);
+}
+
+.menu-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: var(--drawer-transition);
+}
+
+.menu-row:hover {
+  background-color: var(--drawer-bg-hover);
+}
+
+.menu-row .plus-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 50px;
 }
 
 /* ===================================
@@ -145,11 +169,17 @@
   z-index: 10;
   padding: 20px;
   overflow-y: auto;
-  border-left: 1px solid #eee;
+  border-left: 1px solid var(--drawer-border-light);
 }
 
 .sub-drawer.open {
   transform: translateX(0);
+}
+
+.pc-sub-drawer-row {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
 }
 
 /* 二级抽屉头部 */
@@ -158,13 +188,13 @@
   flex-direction: column;
   margin-bottom: 20px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--drawer-border-light);
 }
 
 .back-button {
   cursor: pointer;
   font-size: 14px;
-  color: #666;
+  color: var(--drawer-text-secondary);
   margin-bottom: 10px;
   transition: color 0.2s;
 }
@@ -180,12 +210,17 @@
 }
 
 /* 二级菜单项 */
+.sub-one {
+  flex: 1;
+  padding-right: 20px;
+}
+
 .sub-menu-item {
   padding: 12px 0;
   border-bottom: 1px solid #f5f5f5;
   cursor: pointer;
   transition: 0.2s;
-  color: #666;
+  color: var(--drawer-text-secondary);
 }
 
 .sub-menu-item:hover {
@@ -198,11 +233,11 @@
 }
 
 .sub-two {
-  width: 330px;
-  height: auto;
+  width: 350px;
+  height: 130px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  padding: 15px;
+  padding: 10px;
   gap: 10px;
 }
 
@@ -211,14 +246,52 @@
   height: 110px;
   background-color: #f2f2f2;
   cursor: pointer;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: var(--drawer-transition);
 }
 
-/* 响应式设计 */
+.sub-two-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--drawer-shadow);
+}
+
+.sub-two-img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.sub-two-name {
+  font-size: 12px;
+  color: var(--drawer-text-color);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ===================================
+   6. 响应式设计
+=================================== */
 @media screen and (max-width: 1024px) {
   .sub-drawer {
     width: 100%;
     left: 0;
+  }
+  
+  .sub-two {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .sub-two-item {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1.38;
   }
 }
 
@@ -232,6 +305,13 @@
     height: auto;
     aspect-ratio: 1.38;
   }
+  .mobile-sub-drawer-two {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  cursor: pointer;
+  }
+  
 }
 
 @media screen and (max-width: 480px) {
@@ -246,6 +326,12 @@
   .sub-drawer {
     padding: 10px;
   }
+  
+  .plus-icon {
+    width: 14px;
+    height: 14px;
+    margin-left: 30px;
+  }
 }
 
 /* 处理横屏模式 */
@@ -256,22 +342,6 @@
 
   .menu-items div {
     padding: 5px 0;
-  }
-}
-
-/* 优化触摸交互 */
-@media (hover: none) {
-  .menu-items div,
-  .sub-two-item {
-    transition: none;
-  }
-
-  .menu-items div:active {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-
-  .sub-two-item:active {
-    transform: scale(0.98);
   }
 }
 

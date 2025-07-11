@@ -8,6 +8,37 @@ import plusIcon from "@/assets/images/+16X16.png";
 import antImage from "@/assets/蚂蚁系列/耳机/蚂蚁系列框148X110.png";
 import SuspendedSilo from "@/assets/吊筒仓系列/吊桶系列.png";
 import earphoneCase from "@/assets/耳机盒系列/耳机仓系列框142X92.png";
+// 导入响应式设计组合式函数
+import { useResponsiveDesign } from "@/components/useResponsiveDesign";
+
+const showBackTop = ref(false);
+
+// 使用响应式设计组合式函数
+const {
+  deviceType,
+  isDesktop,
+  isTablet,
+  isMobile,
+  isSmallMobile,
+  isMobileDevice,
+  screenOrientation,
+  isPortrait,
+  isLandscape,
+  isLowLandscape,
+  windowWidth,
+  windowHeight,
+  isTouchDevice,
+  getResponsiveClasses,
+  getResponsiveSizes,
+} = useResponsiveDesign();
+
+// 监听设备变化，输出当前设备信息（调试用）
+watch([deviceType, screenOrientation], ([newDeviceType, newOrientation]) => {
+  console.log(`当前设备类型: ${newDeviceType}`);
+  console.log(`当前屏幕方向: ${newOrientation}`);
+  console.log(`屏幕尺寸: ${windowWidth.value}x${windowHeight.value}`);
+  console.log(`是否为触摸设备: ${isTouchDevice.value}`);
+});
 const props = defineProps({
   drawer: {
     type: Boolean,
@@ -21,6 +52,7 @@ const subDrawerVisible = ref(false);
 const selectedMenuTitle = ref("");
 // 记录当前选中的二级菜单项
 const selectedSubItem = ref("");
+
 // 控制二级抽屉显示与选中的二级菜单
 const handleClose = () => {
   emit("update:drawer", false);
@@ -29,6 +61,7 @@ const handleClose = () => {
   selectedMenuTitle.value = "";
   selectedSubItem.value = "";
 };
+
 // 打开二级抽屉
 const openSubDrawer = (title) => {
   const menuItem = res.find((item) => item.title === title);
@@ -37,16 +70,19 @@ const openSubDrawer = (title) => {
     subDrawerVisible.value = true;
   }
 };
+
 // 关闭二级抽屉
 const handleSubDrawerClose = () => {
   subDrawerVisible.value = false;
 };
+
 // 处理二级菜单项点击
 const handleSubItemClick = (item) => {
   selectedSubItem.value = item;
   // 这里可以根据需要添加跳转逻辑
   console.log("选择了二级菜单:", selectedMenuTitle.value, "->", item);
 };
+
 // 菜单数据
 const res = [
   {
@@ -117,6 +153,7 @@ const currentSubList = computed(() => {
     res.find((item) => item.title === selectedMenuTitle.value)?.subTitle || []
   );
 });
+
 // 处理系列点击
 const open = (title) => {
   try {
@@ -149,6 +186,23 @@ const handleContactClick = (type) => {
   handleClose();
 };
 
+// 动态计算抽屉宽度
+const drawerSize = computed(() => {
+  // 移动设备
+  if (isMobileDevice.value) {
+    return "100%"; // 移动设备全屏显示
+  }
+
+  // PC设备，根据是否显示二级抽屉调整宽度
+  if (subDrawerVisible.value) {
+    // 如果屏幕宽度小于1200px，使用百分比
+    return windowWidth.value < 1200 ? "90%" : "1100px";
+  } else {
+    // 主抽屉宽度也根据屏幕大小调整
+    return windowWidth.value < 768 ? "80%" : "300px";
+  }
+});
+
 // 监听主抽屉关闭事件
 watch(
   () => props.drawer,
@@ -173,7 +227,7 @@ watch(
   <el-drawer
     :model-value="props.drawer"
     direction="ltr"
-    :size="subDrawerVisible ? '1100px' : '300px'"
+    :size="drawerSize"
     @close="handleClose"
     class="main-drawer"
   >
@@ -203,11 +257,7 @@ watch(
       <div class="menu-sectiontwo">
         <el-row class="menu-row" @click="handleSurpriseClick">
           <div class="menu-title">走进Surprise Ant</div>
-          <el-image
-            :src="plusIcon"
-            fit="cover"
-            style="width: 16px; height: 16px; margin-left: 50px"
-          />
+          <el-image :src="plusIcon" fit="cover" class="plus-icon" />
         </el-row>
       </div>
 
@@ -227,7 +277,43 @@ watch(
       :class="{ open: subDrawerVisible }"
       v-show="subDrawerVisible"
     >
-      <el-row style="display: flex; justify-content: space-between">
+      <!-- 移动端 -->
+      <div class="mobile-sub-drawer" v-if="isMobileDevice">
+        <div class="sub-one">
+          <div class="sub-drawer-header">
+            <div @click="handleSubDrawerClose" class="back-button">← 返回</div>
+            <h3>{{ selectedMenuTitle }}</h3>
+          </div>
+          <div class="sub-drawer-content">
+            <div
+              v-for="(item, index) in currentSubList"
+              :key="index"
+              class="sub-menu-item"
+              :class="{ active: selectedSubItem === item }"
+              @click="handleSubItemClick(item)"
+            >
+              {{ item }}
+            </div>
+          </div>
+        </div>
+        <div class="mobile-sub-drawer-two" v-if="selectedMenuTitle === '珠宝'">
+          <div
+            v-for="item in res[1].series"
+            :key="item.title"
+            @click="open(item.title)"
+            class="mobile-sub-drawer-div"
+          >
+            <img
+              :src="item.subTitle.img"
+              :alt="item.title"
+              class="mobile-sub-drawer-img"
+            />
+            <span>{{ item.title }}</span>
+          </div>
+        </div>
+      </div>
+      <!-- PC端 -->
+      <el-row class="pc-sub-drawer-row" v-else>
         <div class="sub-one">
           <div class="sub-drawer-header">
             <div @click="handleSubDrawerClose" class="back-button">← 返回</div>
@@ -252,8 +338,12 @@ watch(
             :key="item.title"
             @click="open(item.title)"
           >
-            <img :src="item.subTitle.img" alt="" class="sub-two-item" />
-            <span>{{ item.title }}</span>
+            <img
+              :src="item.subTitle.img"
+              :alt="item.title"
+              class="sub-two-img"
+            />
+            <span class="sub-two-name">{{ item.title }}</span>
           </div>
         </div>
       </el-row>

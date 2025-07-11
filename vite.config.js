@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 import legacy from '@vitejs/plugin-legacy'
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/MYJX_Web/',
+  base: './',
   plugins: [vue(), vueDevTools(), legacy({
     targets: ['defaults', 'not IE 11'],
   }),],

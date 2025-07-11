@@ -49,10 +49,10 @@ const {
 
 // 监听设备变化，输出当前设备信息（调试用）
 watch([deviceType, screenOrientation], ([newDeviceType, newOrientation]) => {
-  console.log(`当前设备类型: ${newDeviceType}`);
-  console.log(`当前屏幕方向: ${newOrientation}`);
-  console.log(`屏幕尺寸: ${windowWidth.value}x${windowHeight.value}`);
-  console.log(`是否为触摸设备: ${isTouchDevice.value}`);
+  // console.log(`当前设备类型: ${newDeviceType}`);
+  // console.log(`当前屏幕方向: ${newOrientation}`);
+  // console.log(`屏幕尺寸: ${windowWidth.value}x${windowHeight.value}`);
+  // console.log(`是否为触摸设备: ${isTouchDevice.value}`);
 });
 
 //Web轮播图
