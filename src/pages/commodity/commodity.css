@@ -1,8 +1,50 @@
+/* 全局边框重置 - 放在最前面 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none !important;
+  outline: none !important;
+}
+
+*::before,
+*::after {
+  border: none !important;
+  outline: none !important;
+}
+
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* 移除所有可能的边框和轮廓 */
+div, span, img, button, input, textarea, select, a, ul, li, p, h1, h2, h3, h4, h5, h6 {
+  border: none !important;
+  outline: none !important;
+}
+
+/* 移除Vue组件的边框 */
+.el-image, .el-image img {
+  border: none !important;
+  outline: none !important;
+}
+
+/* 移除Swiper组件的边框 */
+.swiper, .swiper-slide, .swiper-wrapper {
+  border: none !important;
+  outline: none !important;
+}
+
 .commodity-container {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
+  border: none !important;
+  outline: none !important;
 }
 
 .commodity-one {
@@ -381,4 +423,586 @@ margin-top: 20px;
 
 .value {
   color: #333;
+}
+
+@media screen and (max-width: 768px) {
+  /* 移动端强制移除所有边框 */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none !important;
+    outline: none !important;
+  }
+
+  *::before,
+  *::after {
+    border: none !important;
+    outline: none !important;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* 确保主容器占满全宽 */
+  #app {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* 移动端容器强制无边框 */
+  .commodity-container {
+    flex-direction: column;
+    border: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .commodity-one {
+    width: 100%;
+    height: 90vh;
+    border-right: none;
+    border: none;
+    outline: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
+  }
+
+  .commodity-one-swiper {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+  }
+
+  .product-swiper {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+  }
+
+  .slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+  }
+
+  /* 移动端默认分页器样式 */
+  :deep(.swiper-pagination) {
+    bottom: 10px !important;
+    text-align: center !important;
+  }
+
+  :deep(.swiper-pagination-bullet) {
+    width: 8px !important;
+    height: 8px !important;
+    background: rgba(0, 0, 0, 0.2) !important;
+    margin: 0 4px !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  :deep(.swiper-pagination-bullet-active) {
+    background: #000 !important;
+    width: 16px !important;
+    border-radius: 4px !important;
+    border: none !important;
+    outline: none !important;
+  }
+
+  /* 移动端商品详情区域样式 */
+  .commodity-two {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+  }
+
+  .commodity-two-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .commodity-two-title span {
+    margin-right: 5px;
+  }
+
+  .commodity-two-title-name {
+    font-size: 24px !important;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .commodity-two-price {
+    margin-bottom: 5px;
+  }
+
+  .commodity-two-price span:first-child {
+    font-size: 24px;
+    font-weight: 600;
+    color: #000;
+  }
+
+  .commodity-two-price span:last-child {
+    font-size: 14px;
+    color: #666;
+    margin-left: 10px;
+  }
+
+  .commodity-two-description {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+    margin: 15px 0;
+  }
+
+  /* 移动端款式选择区域 */
+  .image-scroll-container {
+    width: 100%;
+    margin: 15px 0;
+  }
+
+  .image-scroll-wrapper {
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .thumbnail-image {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 8px;
+    border: none !important;
+    outline: none !important;
+  }
+
+  /* 移动端咨询区域 */
+  .commodity-two-consult {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 0 15px 0;
+    gap: 0;
+  }
+
+  .commodity-two-consult-item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .commodity-two-consult-item .thumbnail-image {
+    width: 24px !important;
+    height: 24px !important;
+    margin-bottom: 5px;
+    border: none !important;
+    outline: none !important;
+  }
+
+  /* 移动端微信选购按钮 */
+  .commodity-two-consult-item-wx {
+    width: 100%;
+    height: 50px;
+    border-radius: 8px;
+    margin: 15px 0;
+    font-size: 16px;
+    border: none !important;
+    outline: none !important;
+  }
+
+  /* 移动端购物袋和立即购买按钮 */
+  .commodity-two-consult-item-G {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    gap: 10px;
+    margin: 15px 0;
+  }
+
+  .commodity-two-consult-item-G-span {
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #000 !important;
+    outline: none !important;
+  }
+
+  /* 移动端分享区域 */
+  .commodity-two-consult-item-G-LW {
+    width: 100%;
+    flex-direction: row;
+    margin: 15px 0;
+    font-size: 14px;
+    color: #666;
+  }
+
+  .commodity-two-consult-item-G-LW .thumbnail-image {
+    width: 20px !important;
+    height: 20px !important;
+    margin-right: 8px;
+    border: none !important;
+    outline: none !important;
+  }
+  .commodity-three-swiper{
+    width: 100%;
+    height: 100vh;
+    border: none;
+    outline: none;
+  }
+
+  /* 确保描述和详情区域完全铺满 */
+  .commodity-four{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: #fff;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .commodity-four-one{
+    width: 100%;
+    padding: 20px 20px 10px 20px;
+    margin: 0;
+    border: none;
+    outline: none;
+    background-color: #fff;
+    box-sizing: border-box;
+  }
+
+  .commodity-four-one .section-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .commodity-four-one .section-title::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 20px;
+    font-weight: normal;
+    color: #666;
+  }
+
+  .commodity-four-one .description-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .commodity-four-one .description-text.expanded {
+    -webkit-line-clamp: unset;
+    display: block;
+  }
+
+  .commodity-four-one .view-more {
+    color: #666;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 0;
+  }
+
+  /* 移动端设备详情区域 */
+  .commodity-four-two {
+    width: 100%;
+    height: auto;
+    min-height: 120px;
+    border: none;
+    outline: none;
+    padding: 15px 20px;
+    background-color: #b8cce8;
+    box-sizing: border-box;
+    position: relative;
+    left: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+  }
+
+  .commodity-four-two .section-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  .commodity-four-two-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 25px;
+    padding: 0;
+  }
+
+  .commodity-four-two .item {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: none;
+    font-size: 14px;
+    color: #666;
+    flex-direction: row;
+  }
+
+  .commodity-four-two .item:last-child {
+    border-bottom: none;
+  }
+
+  .commodity-four-two .icon-image {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    border: none !important;
+    outline: none !important;
+    flex-shrink: 0;
+  }
+
+  .commodity-four-two .label {
+    color: #666;
+    margin-right: 4px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .commodity-four-two .value {
+    color: #333;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  /* 移动端最近浏览区域样式 */
+  .recent-views {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 15px;
+    background: #fff;
+    margin-top: 15px;
+    box-sizing: border-box;
+  }
+
+  .recent-container {
+    height: auto;
+    margin-left: 0;
+    padding: 0;
+  }
+
+  .recent-title {
+    margin-left: 0;
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: 500;
+  }
+
+  .recent-swiper {
+    width: 100%;
+    height: auto;
+  }
+
+  .recent-slide {
+    cursor: pointer;
+    width: calc(50% - 10px) !important;
+    margin-right: 10px;
+  }
+
+  .recent-item {
+    display: flex;
+    flex-direction: column;
+    height: 220px;
+    padding: 12px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e8e8e8;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: flex-start !important;
+  }
+
+  .recent-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  .recent-image {
+    width: 100%;
+    height: 140px;
+    object-fit: contain;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    margin-bottom: 10px;
+    align-self: center;
+  }
+
+  .recent-info {
+    width: 100% !important;
+    padding: 0 8px !important;
+    flex: 1;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    margin: 0 !important;
+  }
+
+  .recent-name {
+    font-size: 12px !important;
+    color: #333 !important;
+    margin-bottom: 4px !important;
+    font-weight: 500;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100% !important;
+    text-align: left !important;
+    display: block !important;
+  }
+
+  .recent-price {
+    font-size: 14px !important;
+    color: #000 !important;
+    font-weight: 600;
+    text-align: left !important;
+    display: block !important;
+    margin: 0 !important;
+  }
+
+  /* 分页器样式 */
+  .recent-pagination {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  :deep(.recent-pagination .custom-bullet) {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
+    margin: 0 3px;
+    transition: all 0.3s ease;
+  }
+
+  :deep(.recent-pagination .custom-bullet-active) {
+    background: #000;
+    width: 12px;
+    border-radius: 3px;
+  }
+  
+    
+  /* 移除ElImage组件的边框 */
+  :deep(.el-image) {
+    border: none !important;
+    outline: none !important;
+  }
+
+  :deep(.el-image img) {
+    border: none !important;
+    outline: none !important;
+  }
+
+  /* 移除所有可能的伪元素边框 */
+  :deep(*::before),
+  :deep(*::after) {
+    border: none !important;
+    outline: none !important;
+  }
+
+  /* 强制覆盖可能的全局样式 */
+  :deep(.recent-item) {
+    align-items: flex-start !important;
+  }
+
+  :deep(.recent-info) {
+    width: 100% !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    margin-left: 0 !important;
+    padding-left: 8px !important;
+  }
+
+  :deep(.recent-name) {
+    text-align: left !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  :deep(.recent-price) {
+    text-align: left !important;
+    margin-left: 0 !important;
+  }
+
+  /* 确保ElImage组件不影响布局 */
+  :deep(.el-image) {
+    border: none !important;
+    outline: none !important;
+    text-align: left !important;
+  }
+
+  :deep(.el-image img) {
+    border: none !important;
+    outline: none !important;
+  }
 }

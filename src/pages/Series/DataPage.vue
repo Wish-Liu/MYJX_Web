@@ -184,6 +184,7 @@ const openProductDetail = (item) => {
               {{ item.subtitle }}
             </div>
             <div class="product-item-div-text-price">￥{{ item.price }}</div>
+            <div class="product-item-div-text-price-line"></div>
           </div>
         </div>
       </div>
@@ -323,6 +324,13 @@ const openProductDetail = (item) => {
   .product-itemtwo span:last-child {
     margin-left: 15px;
     margin-bottom: 20px;
+  }
+  .product-item-div-text-price-line {
+    width: 20%;
+    height: 1px;
+    background-color: #000000;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
 

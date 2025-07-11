@@ -755,7 +755,7 @@ const handleImageClick = (index) => {
   }
 };
 
-// 轮播图配置
+// 电脑端轮播图配置
 const swiperOptions = {
   modules: [Autoplay, Pagination, Navigation],
   direction: "vertical",
@@ -774,6 +774,21 @@ const swiperOptions = {
     renderBullet: function (index, className) {
       return `<span class="${className}"></span>`;
     },
+  },
+};
+// 手机端轮播图配置
+const mobileSwiperOptions = {
+  modules: [Autoplay, Pagination, Navigation],
+  direction: "horizontal",
+  grabCursor: true,
+  simulateTouch: true,
+  loop: true,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    clickable: true,
   },
 };
 // 描述展开
@@ -797,6 +812,24 @@ const recentSwiperOptions = {
       return `<span class="${className}"></span>`;
     },
   },
+  breakpoints: {
+    320: {
+      slidesPerView: 2,
+      spaceBetween: 10,
+    },
+    480: {
+      slidesPerView: 2,
+      spaceBetween: 10,
+    },
+    768: {
+      slidesPerView: 3,
+      spaceBetween: 15,
+    },
+    1024: {
+      slidesPerView: 4,
+      spaceBetween: 20,
+    },
+  },
 };
 
 // 最近浏览点击
@@ -808,17 +841,58 @@ const handleRecentClick = (item) => {
     },
   });
 };
+// 导入响应式设计组合式函数
+import { useResponsiveDesign } from "@/components/useResponsiveDesign";
+
+// 使用响应式设计组合式函数
+const {
+  deviceType,
+  isDesktop,
+  isTablet,
+  isMobile,
+  isSmallMobile,
+  isMobileDevice,
+  screenOrientation,
+  isPortrait,
+  isLandscape,
+  isLowLandscape,
+  windowWidth,
+  windowHeight,
+  isTouchDevice,
+  getResponsiveClasses,
+  getResponsiveSizes,
+} = useResponsiveDesign();
+
+// 监听设备变化，输出当前设备信息（调试用）
+watch([deviceType, screenOrientation], ([newDeviceType, newOrientation]) => {
+  // console.log(`当前设备类型: ${newDeviceType}`);
+  // console.log(`当前屏幕方向: ${newOrientation}`);
+  // console.log(`屏幕尺寸: ${windowWidth.value}x${windowHeight.value}`);
+  // console.log(`是否为触摸设备: ${isTouchDevice.value}`);
+});
 </script>
 
 <template>
   <div v-if="!isLoading && currentData">
     <div class="commodity-container">
-      <!-- 商品轮播图片 -->
-      <div class="commodity-one">
+      <!-- 商品轮播图 -->
+      <!-- 手机端 -->
+      <div class="commodity-one" v-if="isMobileDevice">
+        <div class="commodity-one-swiper">
+          <swiper class="product-swiper" v-bind="mobileSwiperOptions">
+            <swiper-slide v-for="item in currentImages" :key="item.id">
+              <img :src="item.image" class="slide-image" alt="商品图片" />
+            </swiper-slide>
+          </swiper>
+        </div>
+      </div>
+      <!-- 电脑端 -->
+      <div class="commodity-one" v-else>
         <swiper class="product-swiper" v-bind="swiperOptions">
           <swiper-slide v-for="item in currentImages" :key="item.id">
             <img :src="item.image" class="slide-image" alt="商品图片" />
           </swiper-slide>
+          <!-- 分页指示器 -->
           <div class="custom-pagination"></div>
         </swiper>
       </div>
@@ -892,12 +966,20 @@ const handleRecentClick = (item) => {
       <div class="commodity-three-swiper">
         <swiper
           :modules="[Navigation, Pagination]"
-          :slides-per-view="2.7"
+          :slides-per-view="isMobileDevice ? 1 : 2.7"
           :space-between="1"
-          :navigation="{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+          :autoplay="{
+            delay: 3000,
+            disableOnInteraction: false,
           }"
+          :navigation="
+            isMobileDevice
+              ? {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+                }
+              : false
+          "
           :pagination="{
             el: '.swiper-pagination',
             clickable: true,
