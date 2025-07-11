@@ -2,8 +2,13 @@
 import "../CSS/Series.css";
 import router from "@/utils/router";
 import { onMounted, ref, watch } from "vue";
+import { useScrollHideHeader } from "@/components/useScrollHideHeader"; // 引入滚动控制钩子
+
 const Seriesname = ref("");
 const seriesLength = ref(0); // 添加存储长度的ref
+
+// 使用滚动控制钩子
+const { isHeaderVisible } = useScrollHideHeader();
 
 // 处理子组件发送的长度更新
 const handleLengthUpdate = (length) => {
@@ -37,7 +42,7 @@ onMounted(() => {
 <template>
   <div class="ant-series">
     <!-- 导航栏 -->
-    <div class="ant-series-nav">
+    <div class="ant-series-nav" :class="{ 'nav-hidden': !isHeaderVisible }">
       <el-row class="ant-series-nav-title">
         <span>{{ Seriesname }}</span>
         <span>{{ seriesLength }}</span>

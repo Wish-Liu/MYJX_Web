@@ -219,6 +219,7 @@ const openProductDetail = (item) => {
 
 .product-itemtwo {
   width: 50%;
+  background-color: #ebe9e9;
   display: flex;
   flex-direction: column;
   align-items: start;

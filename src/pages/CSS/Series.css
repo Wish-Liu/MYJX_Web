@@ -1,9 +1,10 @@
 .ant-series {
   width: 100%;
   min-height: 100vh;
-  background-color: #e6e5e5;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
+  padding-top: clamp(50px, 8vh, 80px); /* 添加上边距，为固定导航栏留出空间 */
 }
 /* 导航栏 */
 .ant-series-nav {
@@ -15,12 +16,18 @@
   align-items: center;
   padding: 0 clamp(10px, 3vw, 20px);
   box-sizing: border-box;
-  position: sticky;
-  top: 45px;
+  position: fixed; /* 改为固定定位 */
+  left: 0;
   z-index: 99;
   border-bottom: 1px solid #e0e0e0;
-  margin-top: 0;
+  transition: transform 0.3s ease; /* 添加过渡动画 */
 }
+
+/* 导航栏隐藏时的样式 */
+.nav-hidden {
+  transform: translateY(-100%);
+}
+
 .ant-series-nav-title {
   display: flex;
   align-items: flex-end;
@@ -49,9 +56,9 @@
 /* 响应式设计 */
 @media screen and (max-width: 768px) {
   .ant-series-nav {
+    top: 3.5rem;
     padding: 0 10px;
-    top: 50px;
-    margin-top: 0;
+    /* 移除 top 和 margin-top，因为已经在主样式中设置了 fixed 定位 */
   }
 
   .ant-series-nav-title {
@@ -62,8 +69,7 @@
 @media screen and (max-width: 480px) {
   .ant-series-nav {
     height: 50px;
-    top: 40px;
-    margin-top: 0;
+    /* 移除 top 和 margin-top */
   }
 
   .ant-series-nav-title,
@@ -76,7 +82,36 @@
 @media screen and (max-height: 500px) and (orientation: landscape) {
   .ant-series-nav {
     height: 40px;
-    margin-top: 40px;
+    /* 保持固定定位效果，移除 margin-top */
+  }
+
+  .ant-series {
+    padding-top: 40px; /* 调整内容区域的上边距 */
+  }
+}
+
+/* 桌面端大屏幕适配 */
+@media screen and (min-width: 1024px) {
+  .ant-series {
+    padding-top: 80px; /* 为大屏幕设置更合适的内容区域上边距 */
+  }
+
+  .ant-series-nav {
+    top: 3.69rem;
+    height: 80px; /* 大屏幕下导航栏高度 */
+    padding: 0 40px; /* 大屏幕下的水平内边距 */
+  }
+
+  .ant-series-nav-title {
+    gap: 20px; /* 大屏幕下的标题间距 */
+  }
+
+  .ant-series-nav-title span:first-child {
+    font-size: 24px; /* 大屏幕下的标题字体大小 */
+  }
+
+  .ant-series-nav-filter {
+    font-size: 18px; /* 大屏幕下的筛选按钮字体大小 */
   }
 }
 
