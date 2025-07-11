@@ -303,11 +303,13 @@ watch(
             @click="open(item.title)"
             class="mobile-sub-drawer-div"
           >
-            <img
-              :src="item.subTitle.img"
-              :alt="item.title"
-              class="mobile-sub-drawer-img"
-            />
+            <div class="mobile-sub-drawer-img-container">
+              <img
+                :src="item.subTitle.img"
+                :alt="item.title"
+                class="mobile-sub-drawer-img"
+              />
+            </div>
             <span>{{ item.title }}</span>
           </div>
         </div>

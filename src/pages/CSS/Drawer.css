@@ -241,37 +241,48 @@
   gap: 10px;
 }
 
-.sub-two-item {
-  width: 152px;
-  height: 110px;
-  background-color: #f2f2f2;
-  cursor: pointer;
+/* PC端图片容器统一样式 */
+.sub-two-img-container {
+  width: 120px;
+  height: 120px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #f5f5f5;
   border-radius: 8px;
-  transition: var(--drawer-transition);
-}
-
-.sub-two-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--drawer-shadow);
+  margin-bottom: 10px;
+  overflow: hidden;
 }
 
 .sub-two-img {
-  width: 100%;
-  height: 80px;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   border-radius: 4px;
-  margin-bottom: 8px;
+}
+
+.sub-two-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.sub-two-item:hover {
+  background-color: #f9f9f9;
+  transform: translateY(-2px);
 }
 
 .sub-two-name {
-  font-size: 12px;
-  color: var(--drawer-text-color);
+  font-size: 16px;
+  color: #333;
   font-weight: 500;
-  text-align: center;
 }
 
 /* ===================================
@@ -343,6 +354,49 @@
   .menu-items div {
     padding: 5px 0;
   }
+}
+
+/* 移动端图片容器统一样式 */
+.mobile-sub-drawer-img-container {
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.mobile-sub-drawer-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.mobile-sub-drawer-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mobile-sub-drawer-div:hover {
+  transform: translateY(-2px);
+  opacity: 0.8;
+}
+
+.mobile-sub-drawer-div span {
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
 }
 
 

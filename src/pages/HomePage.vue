@@ -1,7 +1,7 @@
 <script setup>
 import { Message, Apple, CaretTop } from "@element-plus/icons-vue";
 import "./CSS/HomePage.css";
-import backgroundImage from "../assets/首页/Web首图.png";
+import backgroundImage from "../assets/首页/Web端首图.png";
 import logo from "../assets/images/logo.png";
 import gmail from "../assets/images/底部邮件24X24.png";
 import apple from "../assets/images/底部苹果22X22.png";
@@ -90,7 +90,7 @@ const resultapp = [
   {
     id: 3,
     image: antSeries4,
-    title: "口红桶系列",
+    title: "口红管系列",
     synopsis:
       "吊筒仓系列，艺术与科技的平衡。以口红为灵感，独创吊筒式开合设计。磁吸悬浮舱体，取放耳机如行云流水。皮质面工艺，高级质感，优雅随行，声声入心。",
   },
