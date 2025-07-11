@@ -5,9 +5,9 @@ import { ref, computed, watch } from "vue";
 import router from "@/utils/router";
 // 图标
 import plusIcon from "@/assets/images/+16X16.png";
-import antImage from "@/assets/蚂蚁系列/耳机/蚂蚁系列框148X110.png";
-import SuspendedSilo from "@/assets/吊筒仓系列/吊桶系列.png";
-import earphoneCase from "@/assets/耳机盒系列/耳机仓系列框142X92.png";
+import antImage from "@/assets/蚂蚁系列/耳机/1绿色详情大图600X600.png";
+import SuspendedSilo from "@/assets/吊筒仓系列/2银吊桶详情图600X600.png";
+import earphoneCase from "@/assets/耳机盒系列/4彩色耳机仓详情图700X700.png";
 // 导入响应式设计组合式函数
 import { useResponsiveDesign } from "@/components/useResponsiveDesign";
 
